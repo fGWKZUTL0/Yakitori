@@ -1,5 +1,36 @@
-<% @posts.each do |post| %>
- <div class="posts-index-item">
-    <%= link_to(post.content, "/posts/#{post.id}") %>
- </div>
-<% end %>
+<div class="main posts-new">
+   <div class="container">
+      <h2 class="form-heading ms-2">投稿する</h2>
+      <%= form_tag("/posts/create") do %>
+      <table class="table table-borderless">
+         <tbody>
+            <div class="form">
+               <tr>
+                  <td>
+                     <div class="form-body">
+                        <textarea name="content" ></textarea>
+                     </div>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <input type="submit" class="btn btn-primary btn-sm" value="投稿">
+                  </td>
+               </tr>
+            </div>
+         </tbody>
+      </table>
+      <% end %>
+  </div>
+</div>
+<table class="table table-borderless">
+   <% @posts.each do |post| %>
+      <tbody>
+            <tr>
+               <td>
+                  <%= link_to(post.content, "/posts/#{post.id}") %>
+               </td>
+            </tr>
+      </tbody>
+   <% end %>
+</table>

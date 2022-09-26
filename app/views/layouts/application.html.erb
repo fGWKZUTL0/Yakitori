@@ -7,9 +7,12 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_tag 'application', 'data-turbolinks-track': 'reload' %>
 <!--- Rails6.0以降は"javascript_pack_tag"、5.0以前は"javascript_include_tag"--->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
   </head>
 
-  <body>
+  <body class="container">
     <header>
       <div class="header-logo">
         <li>
@@ -23,9 +26,11 @@
         <li>
           <%= link_to("投稿一覧", "/posts/index") %>
         </li>
+        <!--
         <li>
           <%= link_to("新規投稿", "/posts/new") %>
         </li>
+         -->
       </ul>
     </header>
     <!-- 各ビューファイルは以下のyieldに代入され、application.html.erbの一部となる -->
