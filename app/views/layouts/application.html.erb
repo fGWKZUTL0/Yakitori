@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>タイトル</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_tag 'application', 'data-turbolinks-track': 'reload' %>
+<!--- Rails6.0以降は"javascript_pack_tag"、5.0以前は"javascript_include_tag"--->
+  </head>
+
+  <body>
+    <header>
+      <div class="header-logo">
+        <li>
+          <%= link_to("タイトル", "/") %>
+        </li>
+      </div>
+      <ul class="header-menus">
+        <li>
+          <%= link_to("about Yakitori", "/about") %>
+        </li>
+        <li>
+          <%= link_to("投稿一覧", "/posts/index") %>
+        </li>
+        <li>
+          <%= link_to("新規投稿", "/posts/new") %>
+        </li>
+      </ul>
+    </header>
+    <!-- 各ビューファイルは以下のyieldに代入され、application.html.erbの一部となる -->
+    <%= yield %>
+  </body>
+</html>
