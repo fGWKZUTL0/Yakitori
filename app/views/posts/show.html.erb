@@ -1,10 +1,22 @@
 <div class="main posts-show">
   <div class="container">
     <div class="posts-show-item">
-      <%= @post.content %>
-      <div class="post-time">
-        <%= @post.created_at %>
-      </div>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th class="table_title">名前</th>
+            <td><b><%= @post.user_name %></b></td>
+          </tr>
+          <tr>
+            <th class="table_title">投稿内容</th>
+            <td><%= nl2br(@post.content) %></td>
+          </tr>
+          <tr>
+            <th class="table_title">投稿時間</th>
+            <td><%= @post.created_at %></td>
+          </tr>
+        </tbody>
+      </table>
       <div class="post-menus">
         <%= link_to("編集", "/posts/#{@post.id}/edit") %>
         <%= link_to("削除", "/posts/#{@post.id}/delete", method: :delete) %>

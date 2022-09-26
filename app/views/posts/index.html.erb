@@ -2,35 +2,56 @@
    <div class="container">
       <h2 class="form-heading ms-2">投稿する</h2>
       <%= form_tag("/posts/create") do %>
-      <table class="table table-borderless">
-         <tbody>
-            <div class="form">
+      <div class="form">
+         <table class="table table-borderless">
+            <tbody>
                <tr>
+                  <td class="table_title">
+                     名前
+                  </td>
                   <td>
-                     <div class="form-body">
-                        <textarea name="content" ></textarea>
+                     <div class="form-body">          
+                        <input type="text" name="user_name">
                      </div>
                   </td>
                </tr>
                <tr>
+                  <td class="table_title">
+                     内容
+                  </td>
                   <td>
-                     <input type="submit" class="btn btn-primary btn-sm" value="投稿">
+                     <div class="form-body">
+                        <textarea name="content"></textarea>
+                     </div>
                   </td>
                </tr>
-            </div>
-         </tbody>
-      </table>
+               <tr>
+                  <td class="table_title">
+                     <input type="submit" class="btn btn-primary btn-sm rounded-pill" value="投稿">
+                  </td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
       <% end %>
   </div>
 </div>
-<table class="table table-borderless">
+<table class="table table-hover">
    <% @posts.each do |post| %>
       <tbody>
             <tr>
-               <td>
-                  <%= link_to(post.content, "/posts/#{post.id}") %>
+               <td id="posts" onclick="jumpToShow(<%= post.id %>)">
+                  <b><%= post.user_name %></b> <br>
+                  <%= nl2br(post.content) %> <br>
+                  <%= post.created_at %>
                </td>
             </tr>
       </tbody>
    <% end %>
 </table>
+
+<script>
+   function jumpToShow(id){
+      location = '/posts/' + id;
+   }
+</script>
