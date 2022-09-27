@@ -43,7 +43,7 @@
    <% @posts.each do |post| %>
       <tbody>
             <tr>
-               <td id="posts" onclick="jumpToShow(<%= post.id %>)">
+               <td id="posts" onclick="jumpToThis(<%= post.id %>)">
                   <b><%= post.user_name %></b> <br>
                   <%= nl2br(post.content) %> <br>
                   <%= post.created_at %>
@@ -54,7 +54,7 @@
 </table>
 
 <script>
-   function jumpToShow(id){
+   function jumpToThis(id){
       location = '/posts/' + id;
    }
 </script>
