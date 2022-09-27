@@ -1,4 +1,9 @@
-.table_title{
+.table-title{
   min-width:50px;
   width:5%;
+}
+
+.table-data{
+  min-width:400px;
+  width:40%;
 }

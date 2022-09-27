@@ -12,28 +12,47 @@
 
   </head>
 
-  <body class="container">
-    <header>
-      <div class="header-logo">
-        <li>
-          <%= link_to("タイトル", "/") %>
-        </li>
+  <body class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <header>
+          <div class="header-logo">
+            <li>
+              <%= link_to("タイトル", "/") %>
+            </li>
+          </div>
+          <ul class="header-menus">
+            <li>
+              <%= link_to("タイムライン", "/posts/index") %>
+            </li>
+            <li>
+              <%= link_to("検索", "/posts/index") %> <!-- 検索ページ -->
+            </li>
+            <li>
+              <%= link_to("通知", "/posts/index") %> <!-- 通知 -->
+            </li>
+            <li>
+              <%= link_to("メッセージ", "/posts/index") %> <!-- メッセージ -->
+            </li>
+            <li>
+              <%= link_to("プロフィール", "/posts/index") %> <!-- プロフィール -->
+            </li>
+            <li>
+              <%= link_to("ログイン", "/posts/index") %> <!-- ログインしてなければログインページに飛ばす -->
+            </li>
+            <li>
+              <%= link_to("設定", "/posts/index") %> <!-- 設定 -->
+            </li>
+          </ul>
+        </header>
       </div>
-      <ul class="header-menus">
-        <li>
-          <%= link_to("about Yakitori", "/about") %>
-        </li>
-        <li>
-          <%= link_to("投稿一覧", "/posts/index") %>
-        </li>
-        <!--
-        <li>
-          <%= link_to("新規投稿", "/posts/new") %>
-        </li>
-         -->
-      </ul>
-    </header>
-    <!-- 各ビューファイルは以下のyieldに代入され、application.html.erbの一部となる -->
-    <%= yield %>
+      <div class="col-6">
+        <!-- 各ビューファイルは以下のyieldに代入され、application.html.erbの一部となる -->
+        <%= yield %>
+      </div>
+      <div class="col-3">
+        <!-- コンテンツ -->
+      </div>
+    </div>
   </body>
 </html>
