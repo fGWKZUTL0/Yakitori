@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'sessions/new'
 
   get 'top' => "home#top"
   get 'about' => "home#about"
@@ -15,14 +16,14 @@ Rails.application.routes.draw do
 
   get "posts/:id/delete" => "posts#destroy"
 
-  get "accounts/signup" => "accounts#new"
-  post "accounts/signup" => "accounts#create"
-
-  get "accounts/sign_in" => "accounts#sign_in"
-  post "accounts/sign_in_process" => "accounts#sign_in_process"
-
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
-  get '/users/:id', to: 'users#show', as: 'profile'
-  delete '/users/:id', to: 'users#destroy', as: 'unsubscribe'
+
+  get "profile" => "users#show"
+  delete "unsubscribe" => "users#destroy"
+
+  get "/login" => "sessions#new"
+  post "/login" => "sessions#create"
+  delete "/logout" => "sessions#destroy"
+
 end
