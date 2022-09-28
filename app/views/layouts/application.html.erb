@@ -14,35 +14,30 @@
     <div class="row">
       <div class="col-3">
         <header>
-          <div class="header-logo">
-            <li>
-              <%= link_to("タイトル", "/posts/index") %>
+          <ul class="nav flex-column m-4">
+            <li class="nav-item">
+              <%= link_to 'タイムライン', posts_index_path, method: :get, class: "nav-link"%>
             </li>
-          </div>
-          <ul class="header-menus">
-            <li>
-              <%= link_to("タイムライン", "/posts/index") %>
+            <li class="nav-item">
+              <%= link_to '検索', posts_index_path, method: :get, class: "nav-link"%>
             </li>
-            <li>
-              <%= link_to("検索", "/posts/index") %> <!-- 検索ページ -->
+            <li class="nav-item">
+              <%= link_to '通知', posts_index_path, method: :get, class: "nav-link"%>
             </li>
-            <li>
-              <%= link_to("通知", "/posts/index") %> <!-- 通知 -->
+            <li class="nav-item">
+              <%= link_to 'メッセージ', posts_index_path, method: :get, class: "nav-link"%>
             </li>
-            <li>
-              <%= link_to("メッセージ", "/posts/index") %> <!-- メッセージ -->
+            <li class="nav-item">
+              <%= link_to 'プロフィール', posts_index_path, method: :get, class: "nav-link"%>
             </li>
-            <li>
-              <%= link_to("プロフィール", "/posts/index") %> <!-- プロフィール -->
+            <li class="nav-item">
+              <%= link_to 'アカウント作成', signup_path, method: :get, class: "nav-link"%>
             </li>
-            <li>
-              <%= link_to("アカウント作成", "/signup") %> <!-- アカウント作成 -->
+            <li class="nav-item">
+              <%= link_to 'ログイン', login_path, method: :get, class: "nav-link"%>
             </li>
-            <li>
-              <%= link_to("ログイン", "/login") %> <!-- サインイン -->
-            </li>
-            <li>
-              <%= link_to("設定", "/posts/index") %> <!-- 設定 -->
+            <li class="nav-item">
+              <%= link_to '設定', posts_index_path, method: :get, class: "nav-link"%>
             </li>
           </ul>
         </header>
