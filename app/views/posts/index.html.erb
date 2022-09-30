@@ -1,20 +1,22 @@
 <div class="main posts-new">
    <div class="container">
       <h2 class="form-heading ms-2">投稿する</h2>
-      <%= form_tag("/posts/create") do %>
+      <%= form_with url: posts_create_path, local: true do |f| %>
       <div class="form">
          <table class="table table-borderless">
             <tbody>
+               <% if current_user != nil %>
                <tr>
                   <td>
-                     名前
+                     <%= current_user.name %>
                   </td>
                   <td>
-                     <div class="form-body">          
-                        <input type="text" name="user_name">
+                     <div class="form-body">
+                        <input type="hidden" name="user_id" value="<%= current_user.user_id %>">
                      </div>
                   </td>
                </tr>
+               <% end %>
                <tr>
                   <td>
                      内容
@@ -44,7 +46,7 @@
       <tbody>
             <tr>
                <td id="posts" onclick="jumpToThis(<%= post.id %>)">
-                  <b><%= post.user_name %></b> <br>
+                  <b><%= post.user_id %></b> <br>
                   <%= nl2br(post.content) %> <br>
                   <%= post.created_at %>
                </td>

@@ -9,9 +9,9 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
 
-    @user.user_id = p SecureRandom.base64(8)
+    user.user_id = p SecureRandom.base64(8)
 
-    if @user.save
+    if user.save
       log_in(user)
       redirect_to profile_path(user)
     else

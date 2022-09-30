@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(user_name: params[:user_name], content: params[:content])
+    @post = Post.new(user_id: params[:user_id], content: params[:content])
     @post.save
 
     redirect_to("/posts/index")

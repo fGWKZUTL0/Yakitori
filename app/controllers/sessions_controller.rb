@@ -3,6 +3,9 @@ class SessionsController < ApplicationController
   before_action :require_login, only: [:destroy]
 
   def new
+    if logged_in?
+      redirect_to profile_path(session[:user_id])
+    end
   end
 
   def create
