@@ -37,4 +37,13 @@ class PostsController < ApplicationController
     redirect_to("/posts/index")
   end
 
+  def mypage
+    if logged_in?
+      logged_user = User.find_by(id: session[:user_id])
+      @posts = Post.where(user_id: logged_user.user_id)
+    else
+      redirect_to(login_path)
+    end
+  end
+
 end

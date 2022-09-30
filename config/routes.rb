@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   get "posts" => "posts#index"
   get "posts/index" => "posts#index"
   get "posts/new" => "posts#new"
+
+  get "posts/mypage" => "posts#mypage" #マイページ表示用 下のposts/:idより上におかないと#showに飛んでしまう
+
   get "posts/:id" => "posts#show"
 
   post "posts/create" => "posts#create"
