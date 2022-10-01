@@ -1,16 +1,39 @@
+#リプライ機能に関しては隣接リストモデルを採用
+
 Posts{
-  id:integer,
+  *id:integer,
   content:text,
   created_at:datetime,
   updated_at:datetime,
-  user_id:integer,
+  username:text,
+  reply_id:integer,
 }
 
-Accounts{
-  id:integer,
+Users{
+  *id:integer,
   name:varchar,
   email:varchar,
   password:varchar,
   created_at:datetime,
   updated_at:datetime,
+  username:text,
+}
+
+Likes{
+  *id:integer,
+  post_id:integer,
+  wholiked:integer,
+  created_at:datetime,
+  updated_at:datetime,
+}
+
+#user_id...フォローしている人
+#follow_id...フォローされている人
+
+Follows{
+  *id:integer,
+  created_at:datetime,
+  updated_at:datetime,
+  user_id:integer,
+  follow_id:integer,
 }

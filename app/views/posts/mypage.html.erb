@@ -1,6 +1,6 @@
 <div class="main posts-new">
    <div class="container">
-      <h2 class="form-heading ms-2">投稿する</h2>
+      <h2 class="form-heading ms-2"><%= current_user.name %></h2>
       
   </div>
 </div>
@@ -9,7 +9,7 @@
       <tbody>
             <tr>
                <td id="posts" onclick="jumpToThis(<%= post.id %>)">
-                  <b><%= post.user_id %></b> <br>
+                  <b><%= post.username %></b> <br>
                   <%= nl2br(post.content) %> <br>
                   <%= post.created_at %>
                </td>
