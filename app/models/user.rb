@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   has_many :posts #関連名
 
   before_save { self.email = email.downcase }

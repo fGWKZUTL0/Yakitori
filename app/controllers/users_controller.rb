@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
 
-    user.user_id = p SecureRandom.base64(8)
+    user.username = p SecureRandom.base64(8)
 
     if user.save
       log_in(user)

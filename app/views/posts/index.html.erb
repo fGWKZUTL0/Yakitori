@@ -1,45 +1,47 @@
 <div class="main posts-new">
    <div class="container">
+   <% if current_user != nil %>
       <h2 class="form-heading ms-2">投稿する</h2>
       <%= form_with url: posts_create_path, local: true do |f| %>
-      <div class="form">
-         <table class="table table-borderless">
-            <tbody>
-               <% if current_user != nil %>
-               <tr>
-                  <td>
-                     <%= current_user.name %>
-                  </td>
-                  <td>
-                     <div class="form-body">
-                        <input type="hidden" name="username" value="<%= current_user.username %>">
-                     </div>
-                  </td>
-               </tr>
-               <% end %>
-               <tr>
-                  <td>
-                     内容
-                  </td>
-                  <td>
-                     <div class="form-body">
-                        <textarea name="content"></textarea>
-                     </div>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     
-                  </td>
-                  <td>
-                     <input type="submit" class="btn btn-primary rounded-pill" value="投稿">
-                  </td>
-               </tr>
-            </tbody>
-         </table>
-      </div>
+         <div class="form">
+            <table class="table table-borderless">
+               <tbody>
+                  <tr>
+                     <td>
+                        <%= current_user.name %>
+                     </td>
+                     <td>
+                        <div class="form-body">
+                           <input type="hidden" name="username" value="<%= current_user.username %>">
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        内容
+                     </td>
+                     <td>
+                        <div class="form-body">
+                           <textarea name="content"></textarea>
+                        </div>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        
+                     </td>
+                     <td>
+                        <input type="submit" class="btn btn-primary rounded-pill" value="投稿">
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
       <% end %>
-  </div>
+   </div>
+  <% else %>
+      <h2>投稿するためにはログインしてください</h2>
+  <% end %>
 </div>
 <table class="table table-hover">
    <% @posts.each do |post| %>
