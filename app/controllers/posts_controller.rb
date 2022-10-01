@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(user_id: params[:user_id], content: params[:content])
+    @post = Post.new(username: params[:username], content: params[:content])
     @post.save
 
     redirect_to("/posts/index")
@@ -40,7 +40,7 @@ class PostsController < ApplicationController
   def mypage
     if logged_in?
       logged_user = User.find_by(id: session[:user_id])
-      @posts = Post.where(user_id: logged_user.user_id)
+      @posts = Post.where(username: logged_user.username)
     else
       redirect_to(login_path)
     end

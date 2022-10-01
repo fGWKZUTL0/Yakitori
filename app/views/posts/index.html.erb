@@ -12,7 +12,7 @@
                   </td>
                   <td>
                      <div class="form-body">
-                        <input type="hidden" name="user_id" value="<%= current_user.user_id %>">
+                        <input type="hidden" name="username" value="<%= current_user.username %>">
                      </div>
                   </td>
                </tr>
@@ -46,7 +46,7 @@
       <tbody>
             <tr>
                <td id="posts" onclick="jumpToThis(<%= post.id %>)">
-                  <b><%= post.user_id %></b> <br>
+                  <b><%= post.username %></b> <br>
                   <%= nl2br(post.content) %> <br>
                   <%= post.created_at %>
                </td>
