@@ -6,7 +6,7 @@
                   <%
                      user = @users.find_by(username: post.username)
                   %>
-                  <b><%= user.name %> @<%= post.username %></b> <br>
+                  <p><%= user.name %><%= link_to ('@' + post.username), "/posts/#{post.username}/profile", method: :get, class: "text-decoration-none"%></p>
                   <%= nl2br(post.content) %> <br>
                   <%= post.created_at %>
                </td>

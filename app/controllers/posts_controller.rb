@@ -38,13 +38,9 @@ class PostsController < ApplicationController
     redirect_to("/posts/index")
   end
 
-  def mypage
-    if logged_in?
-      logged_user = User.find_by(id: session[:user_id])
-      @posts = Post.where(username: logged_user.username)
-      @users = User.all
-    else
-      redirect_to(login_path)
-    end
+  def profile
+    @posts = Post.all.where(username: params[:username]).order(created_at: :desc)
+    @this_user = User.find_by(username: params[:username])
+    @users = User.all
   end
 end
