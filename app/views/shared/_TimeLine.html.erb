@@ -3,7 +3,10 @@
       <tbody>
             <tr>
                <td id="posts" onclick="jumpToThis(<%= post.id %>)">
-                  <b><%= post.username %></b> <br>
+                  <%
+                     user = @users.find_by(username: post.username)
+                  %>
+                  <b><%= user.name %> @<%= post.username %></b> <br>
                   <%= nl2br(post.content) %> <br>
                   <%= post.created_at %>
                </td>

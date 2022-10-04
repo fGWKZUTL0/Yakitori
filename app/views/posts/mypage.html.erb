@@ -1,25 +1,7 @@
 <div class="main posts-new">
    <div class="container">
       <h2 class="form-heading ms-2"><%= current_user.name %>'s Profile</h2>
-      
   </div>
 </div>
-<table class="table table-hover">
-   <% @posts.each do |post| %>
-      <tbody>
-            <tr>
-               <td id="posts" onclick="jumpToThis(<%= post.id %>)">
-                  <b><%= post.username %></b> <br>
-                  <%= nl2br(post.content) %> <br>
-                  <%= post.created_at %>
-               </td>
-            </tr>
-      </tbody>
-   <% end %>
-</table>
 
-<script>
-   function jumpToThis(id){
-      location = '/posts/' + id;
-   }
-</script>
+<%= render partial: 'shared/TimeLine', locals:{ 'posts': @posts, 'users': @users } %>

@@ -42,6 +42,7 @@ class PostsController < ApplicationController
     if logged_in?
       logged_user = User.find_by(id: session[:user_id])
       @posts = Post.where(username: logged_user.username)
+      @users = User.all
     else
       redirect_to(login_path)
     end

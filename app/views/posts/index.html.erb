@@ -43,25 +43,5 @@
       <h2>投稿するためにはログインしてください</h2>
   <% end %>
 </div>
-<table class="table table-hover">
-   <% @posts.each do |post| %>
-      <tbody>
-            <tr>
-               <td id="posts" onclick="jumpToThis(<%= post.id %>)">
-                  <%
-                     user = @users.find_by(username: post.username)
-                  %>
-                  <b><%= user.name %> @<%= post.username %></b> <br>
-                  <%= nl2br(post.content) %> <br>
-                  <%= post.created_at %>
-               </td>
-            </tr>
-      </tbody>
-   <% end %>
-</table>
 
-<script>
-   function jumpToThis(id){
-      location = '/posts/' + id;
-   }
-</script>
+<%= render partial: 'shared/TimeLine', locals:{ 'posts': @posts, 'users': @users } %>
