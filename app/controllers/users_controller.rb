@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
 
-    user.username = p SecureRandom.base64(8)
+    user.username = p SecureRandom.hex(5)
 
     if user.save
       log_in(user)
@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    Post.where(username: current_user.username).destroy_all
     current_user.destroy
     redirect_to signup_path
   end

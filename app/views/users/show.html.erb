@@ -3,5 +3,5 @@
 <p>名前：<%= current_user.name %></p>
 <p>ユーザーネーム：<%= current_user.username %></p>
 <p>メールアドレス：<%= current_user.email %></p>
-<p><%= button_to '登録解除', unsubscribe_path, method: :delete, class: "btn btn-primary rounded-pill" , data: { confirm: '本当に登録解除しますか？' } %></p>
+<p><%= button_to 'アカウント削除', unsubscribe_path, method: :delete, class: "btn btn-primary rounded-pill" , data: { confirm: '本当に削除しますか？' } %></p>
 <p><%= button_to 'サインアウト', logout_path, method: :delete, class: "btn btn-primary rounded-pill" %></p>
