@@ -1,6 +1,36 @@
-<div class="main posts-new">
+<%
+   this_user = @this_user
+%>
+<div class="main profile">
    <div class="container">
-      <h2 class="form-heading ms-2"><%= @this_user.name %>'s Profile</h2>
+      <table class="table table-borderless">
+         <tbody>
+               <tr>
+                  <td id="icon">
+
+                  </td>
+                  <td id="undefind">
+
+                  </td>
+               </tr>
+               <tr>
+                  <td id="name">
+                     <h3><b><%= this_user.name %></b></h3>
+                     <p><small class="text-muted">@<%= this_user.username %></small></p>
+                  </td>
+                  <td id="button">
+                     <% if current_user.username == this_user.username %>
+                        <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
+                     <% end %>
+                  </td>
+               </tr>
+               <tr>
+                  <td>
+                     <p><%= this_user.bio %></p>
+                  </td>
+               </tr>
+         </tbody>
+      </table>
   </div>
 </div>
 

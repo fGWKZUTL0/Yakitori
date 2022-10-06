@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
 
   get "profile" => "users#show"
+  get "/:username/profile/edit" => "users#edit" #プロフィール更新用
+  patch ":username/profile/edit" => "users#update"
   delete "unsubscribe" => "users#destroy"
 
   get "/login" => "sessions#new"
