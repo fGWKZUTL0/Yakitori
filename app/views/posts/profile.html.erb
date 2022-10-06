@@ -21,6 +21,8 @@
                   <td id="button">
                      <% if current_user.username == this_user.username %>
                         <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
+                     <% elsif %>
+                        <%= button_to 'フォロー', "/posts/index", method: :get, class: "btn btn-primary rounded-pill" %>
                      <% end %>
                   </td>
                </tr>
