@@ -3,36 +3,26 @@
 %>
 <div class="main profile">
    <div class="container">
-      <table class="table table-borderless">
-         <tbody>
-               <tr>
-                  <td id="icon">
+      <div class="row">
+         <div class="col-2">
+            <%= image_tag this_user.icon.thumb50.url %>
+         </div>
+         <div class="col-4">
+            <h3><b><%= this_user.name %></b></h3>
+            <p><small class="text-muted">@<%= this_user.username %></small></p>
+         </div>
+         <div class="col-6">
+            <% if current_user.username == this_user.username %>
+               <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
+            <% elsif %>
+               <%= button_to 'フォロー', "/posts/index", method: :get, class: "btn btn-primary rounded-pill" %>
+            <% end %>
+         </div>   
+      </div>
+      <div class="row">
+         <p><%= this_user.bio %></p>
+      </div>
 
-                  </td>
-                  <td id="undefind">
-
-                  </td>
-               </tr>
-               <tr>
-                  <td id="name">
-                     <h3><b><%= this_user.name %></b></h3>
-                     <p><small class="text-muted">@<%= this_user.username %></small></p>
-                  </td>
-                  <td id="button">
-                     <% if current_user.username == this_user.username %>
-                        <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
-                     <% elsif %>
-                        <%= button_to 'フォロー', "/posts/index", method: :get, class: "btn btn-primary rounded-pill" %>
-                     <% end %>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <p><%= this_user.bio %></p>
-                  </td>
-               </tr>
-         </tbody>
-      </table>
   </div>
 </div>
 

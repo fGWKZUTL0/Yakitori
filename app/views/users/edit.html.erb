@@ -1,12 +1,20 @@
 <div class="main users-new">
   <div class="container">
     <h1 class="form-heading">編集する</h1>
-    <%= form_with model: @user,url: { controller: 'users', action: 'update', id: @user.id}, local: true do |f| %>
+    <%= form_with model: @user,url: { controller: 'users', action: 'update', id: @user.id}, html: { multipart: true }, local: true do |f| %>
 
       <div class="form">
         <div class="form-body">
           <p>bio</p>
-          <textarea type="text" name="bio"><%= @user.bio %></textarea>
+          <div>
+            <label>
+              icon
+              <input type="file" name="icon" accept="image/jpeg, image/png, image/jpg, image/gif" >
+            </label>
+          </div>
+          <div>
+            <textarea type="text" name="bio"><%= @user.bio %></textarea>
+          </div>
           <input type="hidden" name="username" value="<%= current_user.username %>">
           <input class="btn btn-primary rounded-pill" type="submit" value="更新">
         </div>
