@@ -10,6 +10,12 @@
          <div class="col-4">
             <h3><b><%= this_user.name %></b></h3>
             <p><small class="text-muted">@<%= this_user.username %></small></p>
+            <p>
+               <strong><%= this_user.followings.count %></strong>
+               <small class="text-muted">フォロー中</small>
+               <strong><%= this_user.followers.count %></strong>
+               <small class="text-muted">フォロワー</small>
+            </p>
          </div>
          <div class="col-6">
             <% if current_user.username == this_user.username %>
@@ -17,7 +23,7 @@
             <% elsif current_user.following?(this_user) %>
                <%= button_to 'フォロー解除', user_follows_path(this_user.id), method: :delete, class: "btn btn-primary rounded-pill" %>
             <% else %>
-               <%= button_to 'フォローする', user_follows_path(this_user.id), method: :post, class: "btn btn-primary rounded-pill" %>
+               <%= button_to 'フォローする', user_follows_path(this_user.id), method: :post, class: "btn btn-outline-primary rounded-pill" %>
             <% end %>
          </div>   
       </div>
