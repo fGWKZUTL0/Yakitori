@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   def show
     #@id = params[:id]
     @post = Post.find_by(id: params[:id])
+    @this_user = User.find_by(username: @post.username)
   end
 
   def new
