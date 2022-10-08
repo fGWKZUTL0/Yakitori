@@ -15,9 +15,9 @@
             <% if current_user.username == this_user.username %>
                <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
             <% elsif current_user.following?(this_user) %>
-               <%= button_to 'フォロー解除', "/posts/index", method: :get, class: "btn btn-primary rounded-pill" %>
+               <%= button_to 'フォロー解除', user_follows_path(this_user.id), method: :delete, class: "btn btn-primary rounded-pill" %>
             <% else %>
-               <%= button_to 'フォローする', "/posts/index", method: :get, class: "btn btn-primary rounded-pill" %>
+               <%= button_to 'フォローする', user_follows_path(this_user.id), method: :post, class: "btn btn-primary rounded-pill" %>
             <% end %>
          </div>   
       </div>
