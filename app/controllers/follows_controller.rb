@@ -11,13 +11,15 @@ class FollowsController < ApplicationController
   end
   # フォロー一覧
   def followings
-    user = User.find(params[:user_id])
-    @users = user.followings
+    user_id = User.find_by(username: params[:username])
+    followed_id_lists = Follow.where(follower_id: user_id).select(:followed_id)
+    @users = User.where(id: followed_id_lists)
   end
   # フォロワー一覧
   def followers
-    user = User.find(params[:user_id])
-    @users = user.followers
+    user_id = User.find_by(username: params[:username])
+    follower_id_lists = Follow.where(followed_id: user_id).select(:follower_id)
+    @users = User.where(id: follower_id_lists)
   end
   
 end

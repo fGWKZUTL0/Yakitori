@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   get "profile" => "users#show"
   get "/:username/profile/edit" => "users#edit" #プロフィール更新用
   patch ":username/profile/edit" => "users#update"
+  get "follows/followings/:username" => "follows#followings", as: 'followings'
+  get "follows/followers/:username" => "follows#followers", as: 'followers'
   delete "unsubscribe" => "users#destroy"
 
   get "/login" => "sessions#new"
