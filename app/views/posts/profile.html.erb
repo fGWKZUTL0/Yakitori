@@ -14,8 +14,10 @@
          <div class="col-6">
             <% if current_user.username == this_user.username %>
                <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
-            <% elsif %>
-               <%= button_to 'フォロー', "/posts/index", method: :get, class: "btn btn-primary rounded-pill" %>
+            <% elsif current_user.following?(this_user) %>
+               <%= button_to 'フォロー解除', "/posts/index", method: :get, class: "btn btn-primary rounded-pill" %>
+            <% else %>
+               <%= button_to 'フォローする', "/posts/index", method: :get, class: "btn btn-primary rounded-pill" %>
             <% end %>
          </div>   
       </div>

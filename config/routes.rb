@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'follows/followings'
+  get 'follows/followers'
   get 'sessions/new'
 
   get 'top' => "home#top"
@@ -30,5 +32,11 @@ Rails.application.routes.draw do
   get "/login" => "sessions#new"
   post "/login" => "sessions#create"
   delete "/logout" => "sessions#destroy"
+
+  resources :users do
+    resource :follows, only: [:create, :destroy]
+    get 'followings' => 'follows#followings', as: 'followings'
+    get 'followers' => 'follows#followers', as: 'followers'
+  end
 
 end

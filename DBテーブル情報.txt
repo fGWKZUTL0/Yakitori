@@ -17,6 +17,8 @@ Users{
   created_at:datetime,
   updated_at:datetime,
   username:text,
+  bio:text,
+  icon,:text,
 }
 
 Likes{
