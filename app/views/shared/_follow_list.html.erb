@@ -1,21 +1,13 @@
 <% if users.exists? %>
-  <% users.each do |user| %>
-    <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= user.name %></td>
-          <td>フォロー数: <%= user.followings.count %></td>
-          <td>フォロワー数: <%= user.followers.count %></td>
-        </tr>
-      </tbody>
-    </table>
+  <% users.each do |this_user| %>
+    <div class="row" id="posts">
+      <div class="col-2">
+        <%= image_tag this_user.icon.thumb100.url, class: "rounded-circle" %>
+      </div>
+      <div class="col-10">
+        <p class="mb-0"><%= this_user.name %><%= link_to ('@' + this_user.username), "/posts/#{this_user.username}/profile", method: :get, class: "text-decoration-none"%></p>
+      </div>
+    </div>
   <% end %>
 <% else %>
   <p>ユーザーはいません</p>

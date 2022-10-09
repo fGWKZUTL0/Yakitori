@@ -12,11 +12,11 @@ class IconUploader < CarrierWave::Uploader::Base
 
   #サムネイルを生成
   version :thumb do
-    process :resize_to_limit => [300, 300]
+    process :resize_to_fill => [150, 150, "center"]
   end
 
-  version :thumb50 do  #アイコン用
-    process resize_to_fit: [100, 100] 
+  version :thumb100 do  #アイコン用
+    process resize_to_fill: [100, 100, "center"]
    end 
 
   # jpg,jpeg,gif,pngのみ
