@@ -3,13 +3,14 @@
       <%
          this_user = @users.find_by(username: post.username)
       %>
-      <div class="row" id="posts" onclick="jumpToThis(<%= post.id %>)">
+      <div class="row" id="posts">
          <div class="col-2">
-            <%= image_tag this_user.icon.thumb100.url, class: "rounded-circle" %>
+            <%= link_to image_tag(this_user.icon.thumb100.url, class: "rounded-circle"), "/posts/#{post.username}/profile" %>
          </div>
-         <div class="col-10">
+         <div class="col-10" onclick="jumpToThis(<%= post.id %>)">
             <p class="mb-0"><%= this_user.name %><%= link_to ('@' + post.username), "/posts/#{post.username}/profile", method: :get, class: "text-decoration-none"%></p>
             <%= nl2br(post.content) %><br>
+            <%= render partial: 'shared/likes', locals:{ 'post': post } %>
             <%= post.created_at %>
          </div>
       </div>
@@ -19,6 +20,10 @@
 
 <script>
    function jumpToThis(id){
-      location = '/posts/' + id;
+      location = '/posts/' + id
+   }
+
+   function jumpToProfile(username){
+      location = '/posts/' + username + '/profile'
    }
 </script>

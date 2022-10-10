@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
   get "posts/:id/delete" => "posts#destroy"
 
+  get "/posts/:id/likes" => "likes#create"
+  delete "/posts/:id/likes" => "likes#destroy"
+
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
 
@@ -39,6 +42,11 @@ Rails.application.routes.draw do
     resource :follows, only: [:create, :destroy]
     get 'followings' => 'follows#followings', as: 'followings'
     get 'followers' => 'follows#followers', as: 'followers'
+  end
+
+  resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+    resource :likes, only: [:create, :destroy]
+    post "/posts/:post_id/likes" => "likes#create"
   end
 
 end

@@ -23,8 +23,8 @@ Users{
 
 Likes{
   *id:integer,
+  user_id:integer,
   post_id:integer,
-  wholiked:integer,
   created_at:datetime,
   updated_at:datetime,
 }

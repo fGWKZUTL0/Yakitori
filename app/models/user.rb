@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :posts #関連名
+  has_many :likes, dependent: :destroy
 
     # フォローをした、されたの関係
   has_many :follows, class_name: "Follow", foreign_key: "follower_id", dependent: :destroy
