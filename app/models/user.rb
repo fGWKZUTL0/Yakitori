@@ -22,7 +22,11 @@ class User < ApplicationRecord
   def following?(user)
     followings.include?(user)
   end
-      
+  
+  def liked_by?(post)
+    likes.where(post_id: post.id).exists?
+  end
+
   #バリデーション
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
