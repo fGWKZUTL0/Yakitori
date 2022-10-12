@@ -1,22 +1,17 @@
-<table class="table table-hover table-borderless">
+<div class="container">
    <% posts.each do |post| %>
-      <tbody>
-            <tr>
-               <td id="posts" onclick="jumpToThis(<%= post.id %>)">
-                  <%
-                     user = @users.find_by(username: post.username)
-                  %>
-                  <p class="mb-0"><%= user.name %><%= link_to ('@' + post.username), "/posts/#{post.username}/profile", method: :get, class: "text-decoration-none"%></p>
-                  <%= nl2br(post.content) %> <br>
-                  <%= post.created_at %>
-               </td>
-            </tr>
-      </tbody>
+      <div id="post_<%= post.id %>" class="mb-2">
+         <%= render 'shared/post', post: post %>
+      </div>
    <% end %>
-</table>
+</div>
 
 <script>
    function jumpToThis(id){
-      location = '/posts/' + id;
+      location = '/posts/' + id
+   }
+
+   function jumpToProfile(username){
+      location = '/posts/' + username + '/profile'
    }
 </script>

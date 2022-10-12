@@ -40,9 +40,8 @@
          </div>
       <% end %>
    </div>
+   <%= render partial: 'shared/TimeLine', locals:{ 'posts': @posts, 'users': @users } %>
   <% else %>
-      <h2>投稿するためにはログインしてください</h2>
+      <h2>ログインしてください</h2>
   <% end %>
 </div>
-
-<%= render partial: 'shared/TimeLine', locals:{ 'posts': @posts, 'users': @users } %>

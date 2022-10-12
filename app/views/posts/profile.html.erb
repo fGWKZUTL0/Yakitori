@@ -3,34 +3,38 @@
 %>
 <div class="main profile">
    <div class="container">
-      <table class="table table-borderless">
-         <tbody>
-               <tr>
-                  <td id="icon">
+      <div class="row">
+         <div class="col-3">
+            <%= image_tag this_user.icon.thumb.url, class: "rounded-circle" %>
+         </div>
+         <div class="col-4">
+            <h3><b><%= this_user.name %></b></h3>
+            <p><small class="text-muted">@<%= this_user.username %></small></p>
+            <p>
+               <a href="/follows/followings/<%= this_user.username %>" class="link-dark">
+                  <strong><%= this_user.followings.count %></strong>
+                  <small class="text-muted">フォロー中</small>
+               </a>
+               <a href="/follows/followers/<%= this_user.username %>" class="link-dark">
+                  <strong><%= this_user.followers.count %></strong>
+                  <small class="text-muted">フォロワー</small>
+               </a>
+            </p>
+         </div>
+         <div class="col-5">
+            <% if current_user.username == this_user.username %>
+               <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
+            <% elsif current_user.following?(this_user) %>
+               <%= button_to 'フォロー解除', user_follows_path(this_user.id), method: :delete, class: "btn btn-primary rounded-pill" %>
+            <% else %>
+               <%= button_to 'フォローする', user_follows_path(this_user.id), method: :post, class: "btn btn-outline-primary rounded-pill" %>
+            <% end %>
+         </div>
+      </div>
+      <div class="row">
+         <p><%= this_user.bio %></p>
+      </div>
 
-                  </td>
-                  <td id="undefind">
-
-                  </td>
-               </tr>
-               <tr>
-                  <td id="name">
-                     <h3><b><%= this_user.name %></b></h3>
-                     <p><small class="text-muted">@<%= this_user.username %></small></p>
-                  </td>
-                  <td id="button">
-                     <% if current_user.username == this_user.username %>
-                        <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
-                     <% end %>
-                  </td>
-               </tr>
-               <tr>
-                  <td>
-                     <p><%= this_user.bio %></p>
-                  </td>
-               </tr>
-         </tbody>
-      </table>
   </div>
 </div>
 

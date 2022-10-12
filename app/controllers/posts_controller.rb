@@ -1,12 +1,15 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all.order(created_at: :desc)
+    #フォローしているユーザーと自分のpostのみを取得する
+    @posts = getTimeline(session[:user_id])
     @users = User.all
+
   end
 
   def show
     #@id = params[:id]
     @post = Post.find_by(id: params[:id])
+    @this_user = User.find_by(username: @post.username)
   end
 
   def new
@@ -43,4 +46,11 @@ class PostsController < ApplicationController
     @this_user = User.find_by(username: params[:username])
     @users = User.all
   end
+
+  private 
+    def getTimeline(user_id)
+      followed_id_lists = Follow.where(follower_id: user_id).select(:followed_id)
+      username_lists = User.where(id: followed_id_lists).or(User.where(id: user_id)).select(:username)
+      @posts = Post.where(username: username_lists).order(created_at: :desc)
+    end
 end

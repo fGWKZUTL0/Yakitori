@@ -30,6 +30,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find_by(username: params[:username])
     @user.update(bio: params[:bio])
+    if params[:icon] != nil
+      @user.update(icon: params[:icon])
+    end
 
     redirect_to("/posts/#{@user.username}/profile")
   end
@@ -42,6 +45,7 @@ class UsersController < ApplicationController
 
   private
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :icon)
     end
+
 end
