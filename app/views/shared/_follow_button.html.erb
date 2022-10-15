@@ -1,7 +1,0 @@
-<div id="follow_<%= this_user.id %>">
-  <% if current_user.following?(this_user) %>
-    <%= button_to 'フォロー解除', user_follows_path(this_user.id), method: :delete, remote: true, class: "btn btn-primary rounded-pill" %>
-  <% else %>
-    <%= button_to 'フォローする', user_follows_path(this_user.id), method: :post, remote: true, class: "btn btn-outline-primary rounded-pill" %>
-  <% end %>
-</div>

@@ -4,5 +4,7 @@ import "controllers"
 import Rails from '@rails/ujs';
 Rails.start();
 
+import './custom/unfollow_text';
+
 //= require popper
 //= require bootstrap-sprockets
