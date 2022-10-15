@@ -45,6 +45,6 @@ class IconUploader < CarrierWave::Uploader::Base
 
   #デフォルト画像の設定
   def default_url
-    "default 150.png" #デフォルト画像に設定したい画像名を記入
+    "default.png" #デフォルト画像に設定したい画像名を記入
   end
 end

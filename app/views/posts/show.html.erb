@@ -11,10 +11,12 @@
             <%= @post.created_at %>
          </div>
       </div>
+      <% if @this_user == current_user %>
       <div class="post-menus">
         <%= link_to("編集", "/posts/#{@post.id}/edit") %>
         <%= link_to("削除", "/posts/#{@post.id}/delete", method: :delete) %>
       </div>
+      <% end %>
     </div>
   </div>
 </div>

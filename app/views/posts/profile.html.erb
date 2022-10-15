@@ -23,11 +23,11 @@
          </div>
          <div class="col-5">
             <% if current_user.username == this_user.username %>
-               <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
-            <% elsif current_user.following?(this_user) %>
-               <%= button_to 'フォロー解除', user_follows_path(this_user.id), method: :delete, class: "btn btn-primary rounded-pill" %>
+               <div class="follow_<%= this_user.id %>">
+                  <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, class: "btn btn-primary rounded-pill" %>
+               </div>
             <% else %>
-               <%= button_to 'フォローする', user_follows_path(this_user.id), method: :post, class: "btn btn-outline-primary rounded-pill" %>
+               <%= render 'shared/follow_button', this_user: this_user %>
             <% end %>
          </div>
       </div>

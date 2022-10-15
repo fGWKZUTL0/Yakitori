@@ -5,7 +5,9 @@
   <div class="col-2">
     <%= link_to image_tag(this_user.icon.thumb100.url, class: "rounded-circle"), "/posts/#{post.username}/profile" %>
   </div>
-  <div class="col-10">
+  <div class="col-1">
+  </div>
+  <div class="col-9">
     <p class="mb-0"><%= this_user.name %>
     <a class="text-decoration-none" href="/posts/<%= post.username %>/profile">@<%= post.username %></a>
     </p>

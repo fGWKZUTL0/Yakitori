@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get "posts/:id/edit" => "posts#edit"
   patch "posts/:id/edit" => "posts#update"
 
-  get "posts/:id/delete" => "posts#destroy"
+  delete "posts/:id/delete" => "posts#destroy"
 
   get "/posts/:id/likes" => "likes#create"
   delete "/posts/:id/likes" => "likes#destroy"
