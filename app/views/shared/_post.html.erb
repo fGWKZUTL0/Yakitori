@@ -12,12 +12,28 @@
     <a class="text-decoration-none" href="/posts/<%= post.username %>/profile">@<%= post.username %></a>
     </p>
     <div class="content" onclick="jumpToThis(<%= post.id %>)"><%= nl2br(post.content) %></div>
-    <% if current_user.liked_by?(post.id) %>
-        <%= link_to "♡#{post.likes.count}", post_likes_path(post), method: :delete, remote: true, class: "link-danger" %>
-    <% else %>
-        <%= link_to "♡#{post.likes.count}", post_likes_path(post), method: :get, remote: true, class: "link-secondary" %>
-    <% end %>
-    <%= post.created_at %>
+    <div class="post_footer">
+      <% if current_user.liked_by?(post.id) %>
+          <%= link_to post_likes_path(post), method: :delete, remote: true, class: "link-danger" do%>
+            <i class="fa-solid fa-heart"><%= post.likes.count %></i>
+          <% end %>
+      <% else %>
+          <%= link_to post_likes_path(post), method: :get, remote: true, class: "link-secondary" do %>
+            <i class="fa-regular fa-heart"><%= post.likes.count %></i>
+          <% end %>
+      <% end %>
+      <%= post.created_at %>
+    </div>
+    <!-- 旧footerコード
+      <div class="post_footer">
+        <% if current_user.liked_by?(post.id) %>
+            <%= link_to "♡#{post.likes.count}", post_likes_path(post), method: :delete, remote: true, class: "link-danger" %>
+        <% else %>
+            <%= link_to "♡#{post.likes.count}", post_likes_path(post), method: :get, remote: true, class: "link-secondary" %>
+        <% end %>
+        <%= post.created_at %>
+      </div>
+     -->
   </div>
 </div>
 <script>
