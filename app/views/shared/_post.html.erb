@@ -13,6 +13,9 @@
     </p>
     <div class="content" onclick="jumpToThis(<%= post.id %>)"><%= nl2br(post.content) %></div>
     <div class="post_footer">
+      <!-- リプライ -->
+        <i id="reply_icon" class="fa-regular fa-comment"><!-- ここにコメント --></i>
+      <!-- いいね -->
       <% if current_user.liked_by?(post.id) %>
           <%= link_to post_likes_path(post), method: :delete, remote: true, class: "link-danger" do%>
             <i class="fa-solid fa-heart"><%= post.likes.count %></i>
@@ -24,16 +27,6 @@
       <% end %>
       <%= post.created_at %>
     </div>
-    <!-- 旧footerコード
-      <div class="post_footer">
-        <% if current_user.liked_by?(post.id) %>
-            <%= link_to "♡#{post.likes.count}", post_likes_path(post), method: :delete, remote: true, class: "link-danger" %>
-        <% else %>
-            <%= link_to "♡#{post.likes.count}", post_likes_path(post), method: :get, remote: true, class: "link-secondary" %>
-        <% end %>
-        <%= post.created_at %>
-      </div>
-     -->
   </div>
 </div>
 <script>

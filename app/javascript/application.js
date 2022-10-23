@@ -5,6 +5,6 @@ import Rails from '@rails/ujs';
 Rails.start();
 
 import './custom/unfollow_text';
-
+import './custom/reply';
 //= require popper
 //= require bootstrap-sprockets
