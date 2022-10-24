@@ -14,7 +14,33 @@
     <div class="content" onclick="jumpToThis(<%= post.id %>)"><%= nl2br(post.content) %></div>
     <div class="post_footer">
       <!-- リプライ -->
-        <i id="reply_icon" class="fa-regular fa-comment"><!-- ここにコメント --></i>
+      <i data-bs-toggle="modal" data-bs-target="#exampleModal" id="reply_icon" class="fa-regular fa-comment"></i>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">返信</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <%= form_with url: posts_create_path, local: true do |f| %>
+              <div class="form">
+                <div class="modal-body">
+                  <div class="form-body">
+                      <input type="hidden" name="username" value="<%= current_user.username %>">
+                      <textarea class="form-control" name="content"></textarea>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">返信</button>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <!-- <i id="reply_icon" class="fa-regular fa-comment"></i> -->
       <!-- いいね -->
       <% if current_user.liked_by?(post.id) %>
           <%= link_to post_likes_path(post), method: :delete, remote: true, class: "link-danger" do%>
