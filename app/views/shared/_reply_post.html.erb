@@ -1,0 +1,6 @@
+<div  class="mb-2">
+  <%= render 'shared/post', post: post, this_user: this_user, users: users %>
+</div>
+<% get_childs(post).each do |child| %>
+    <%= render 'shared/reply_post', post: child, this_user: users.find_by(username: child.username), users: users %>
+<% end %>
