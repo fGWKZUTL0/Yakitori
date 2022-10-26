@@ -1,12 +1,10 @@
 <div class="main posts-new">
   <div class="container">
     <h2 class="form-heading ms-2">検索</h2>
-    <%= form_with url: search_index_path, method: "get", remote: true, class: "form" do |f| %>
+    <%= form_with url: search_index_path, method: "get", class: "form" do |f| %>
       <input type="text" name="keyword" class="form-control" placeholder="キーワードを入力">
       <%= f.submit "検索", class: "btn btn-primary rounded-pill" %>
     <% end %>
   </div>
-  <% if @results != nil && @users != nil %>
-    <%= render partial: 'shared/TimeLine', locals:{ 'posts': @results, 'users': @users } %>
-  <% end %>
+  <%= render partial: 'shared/result', locals:{ 'posts': @results, 'users': @users } %>
 </div>

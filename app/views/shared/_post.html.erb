@@ -1,4 +1,5 @@
-<div id="post_<%= post.id %>">
+
+<turbo-frame id="turbo-frame-post-<%= post.id %>">
   <div class="row" id="posts">
     <div class="col-2">
       <%= link_to image_tag(this_user.icon.thumb100.url, class: "rounded-circle"), "/posts/#{post.username}/profile" %>
@@ -44,11 +45,11 @@
         <!-- <i id="reply_icon" class="fa-regular fa-comment"></i> -->
         <!-- いいね -->
         <% if current_user.liked_by?(post.id) %>
-          <%= link_to post_likes_path(post), method: :delete, remote: true, class: "link-danger" do%>
+          <%= link_to post_likes_path(post), class: "link-danger", data: { turbo_method: :delete } do%>
             <i class="fa-solid fa-heart"><%= post.likes.count %></i>
           <% end %>
         <% else %>
-          <%= link_to post_likes_path(post), method: :get, remote: true, class: "link-secondary" do %>
+          <%= link_to post_likes_path(post), method: :get, class: "link-secondary" do %>
             <i class="fa-regular fa-heart"><%= post.likes.count %></i>
           <% end %>
         <% end %>
@@ -56,4 +57,4 @@
       </div>
     </div>
   </div>
-</div>
+</turbo-frame>

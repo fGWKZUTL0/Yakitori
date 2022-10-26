@@ -7,6 +7,12 @@ class LikesController < ApplicationController
 
     @this_user = User.all.find_by(username: post.username)
     @users = User.all
+
+    render turbo_stream: turbo_stream.replace(
+      "turbo-frame-post-#{post.id}",
+      partial: 'shared/post',
+      locals: { post: post, this_user: @this_user},
+    )
     #redirect_to posts_path
   end
 
@@ -17,6 +23,12 @@ class LikesController < ApplicationController
     
     @this_user = User.all.find_by(username: post.username)
     @users = User.all
+
+    render turbo_stream: turbo_stream.replace(
+      "turbo-frame-post-#{post.id}",
+      partial: 'shared/post',
+      locals: { post: post, this_user: @this_user},
+    )
     #redirect_to posts_path
   end
 

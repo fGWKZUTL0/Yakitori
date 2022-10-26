@@ -39,7 +39,6 @@ Rails.application.routes.draw do
   delete "/logout" => "sessions#destroy"
 
   get "/search/index" => "searches#index"
-  post "/search/result" => "searches#search"
 
   resources :users do
     resource :follows, only: [:create, :destroy]
@@ -50,6 +49,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
     resource :likes, only: [:create, :destroy]
     post "/posts/:post_id/likes" => "likes#create"
+    delete "/posts/:post_id/likes" => "likes#destroy"
   end
 
 end
