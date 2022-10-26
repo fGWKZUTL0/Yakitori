@@ -4,12 +4,24 @@ class FollowsController < ApplicationController
     @this_user = User.find_by(id: params[:user_id])
     current_user.follow(params[:user_id])
     #redirect_to request.referer
+
+    render turbo_stream: turbo_stream.replace(
+      'follow_button',
+      partial: 'shared/follow_button',
+      locals: { this_user: @this_user },
+    )
   end
   # フォロー外すとき
   def destroy
     @this_user = User.find_by(id: params[:user_id])
     current_user.unfollow(params[:user_id])
     #redirect_to request.referer
+
+    render turbo_stream: turbo_stream.replace(
+      'follow_button',
+      partial: 'shared/follow_button',
+      locals: { this_user: @this_user },
+    )
   end
   # フォロー一覧
   def followings

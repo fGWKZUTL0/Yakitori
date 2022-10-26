@@ -43,6 +43,12 @@ class UsersController < ApplicationController
     redirect_to signup_path
   end
 
+  def profile
+    @posts = Post.all.where(username: params[:username]).order(created_at: :desc)
+    @this_user = User.find_by(username: params[:username])
+    @users = User.all
+  end
+
   private
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :bio, :icon)

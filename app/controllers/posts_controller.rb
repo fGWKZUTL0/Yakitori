@@ -46,12 +46,6 @@ class PostsController < ApplicationController
     redirect_to("/posts/index")
   end
 
-  def profile
-    @posts = Post.all.where(username: params[:username]).order(created_at: :desc)
-    @this_user = User.find_by(username: params[:username])
-    @users = User.all
-  end
-
   private 
     def getTimeline(user_id)
       followed_id_lists = Follow.where(follower_id: user_id).select(:followed_id)
