@@ -38,6 +38,9 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   delete "/logout" => "sessions#destroy"
 
+  get "/search/index" => "searches#index"
+  post "/search/result" => "searches#search"
+
   resources :users do
     resource :follows, only: [:create, :destroy]
     get 'followings' => 'follows#followings', as: 'followings'
