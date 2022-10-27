@@ -1,7 +1,7 @@
 {
   const exampleModal = document.getElementById("exampleModal")
 
-  exampleModal.addEventListener('show.bs.modal', function (event) {
+  document.addEventListener('show.bs.modal', function (event) {
     // Button that triggered the modal
     const button = event.relatedTarget
     // Extract info from data-bs-* attributes
@@ -26,7 +26,7 @@
   
   submit_btn.addEventListener('click', function(event){
     event.preventDefault()
-    modal_form.submit()
     myModal.hide()
+    modal_form.submit()
   })
 }
