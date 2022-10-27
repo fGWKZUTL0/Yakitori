@@ -13,18 +13,19 @@
       <div class="content" onclick="jumpToThis(<%= post.id %>)"><%= nl2br(post.content) %></div>
       <div class="post_footer">
         <!-- リプライ -->
+        
         <i data-bs-toggle="modal" data-bs-target="#exampleModal" id="reply_icon" data-bs-whatever="<%= post.id %>" class="fa-regular fa-comment">
           <%= reply_count(post) %>
         </i>
 
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="返信フォーム用モーダル" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">返信</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <%= form_with url: posts_create_path, local: true do |f| %>
+              <%= form_with url: posts_create_path, local: true, class: "modal_form" do |f| %>
                 <div class="form">
                   <div class="modal-body">
                     <div class="form-body">

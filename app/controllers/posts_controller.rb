@@ -18,14 +18,26 @@ class PostsController < ApplicationController
   end
 
   def create
+    @this_user = User.find_by(username: params[:username])
+
     if params[:parent_id] != nil
+      #リプライ
       @post = Post.new(username: params[:username], content: params[:content], parent_id: params[:parent_id])
       @post.save
+
+      redirect_to "/posts/#{getEndOfParentId(@post)}"
     elsif
+      #リプライではない普通のツイート
       @post = Post.new(username: params[:username], content: params[:content], parent_id: -1)
       @post.save
+
+      render turbo_stream: turbo_stream.replace(
+        "new_post",
+        partial: 'shared/new_post',
+        locals: { post: @post, this_user: @this_user},
+      )
     end
-    redirect_to("/posts/index")
+    #redirect_to("/posts/index")
   end
 
   def edit
@@ -56,5 +68,12 @@ class PostsController < ApplicationController
     def getFollows(user_id)
       followed_id_lists = Follow.where(follower_id: user_id).select(:followed_id)
       @users = User.where(id: followed_id_lists).or(User.where(id: user_id))
+    end
+
+    def getEndOfParentId(post)
+      while post.parent_id != -1
+        post = Post.all.find_by(id: post.parent_id)
+      end
+      post.id
     end
 end
