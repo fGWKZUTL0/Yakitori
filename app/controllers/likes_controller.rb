@@ -5,6 +5,7 @@ class LikesController < ApplicationController
     like = current_user.likes.new(post_id: post.id)
     like.save
 
+    @this_user = User.all.find_by(username: post.username)
     @users = User.all
     #redirect_to posts_path
   end
@@ -14,6 +15,7 @@ class LikesController < ApplicationController
     like = current_user.likes.find_by(post_id: post.id)
     like.destroy
     
+    @this_user = User.all.find_by(username: post.username)
     @users = User.all
     #redirect_to posts_path
   end

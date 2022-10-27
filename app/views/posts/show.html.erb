@@ -2,21 +2,8 @@
   <div class="container">
     <div class="posts-show-item">
       <div class="row" id="posts">
-         <div class="col-2">
-            <%= image_tag @this_user.icon.thumb100.url, class: "rounded-circle" %>
-         </div>
-         <div class="col-10">
-            <p class="mb-0"><%= @this_user.name %><%= link_to ('@' + @post.username), "/posts/#{@post.username}/profile", method: :get, class: "text-decoration-none"%></p>
-            <%= nl2br(@post.content) %><br>
-            <%= @post.created_at %>
-         </div>
+        <%= render 'shared/reply_post', post: @post, this_user: @this_user, users: @users %>
       </div>
-      <% if @this_user == current_user %>
-      <div class="post-menus">
-        <%= link_to("編集", "/posts/#{@post.id}/edit") %>
-        <%= link_to("削除", "/posts/#{@post.id}/delete", method: :delete) %>
-      </div>
-      <% end %>
     </div>
   </div>
 </div>

@@ -9,6 +9,7 @@ class PostsController < ApplicationController
   def show
     #@id = params[:id]
     @post = Post.find_by(id: params[:id])
+    @users = User.all
     @this_user = User.find_by(username: @post.username)
   end
 
@@ -17,9 +18,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(username: params[:username], content: params[:content])
-    @post.save
-
+    if params[:parent_id] != nil
+      @post = Post.new(username: params[:username], content: params[:content], parent_id: params[:parent_id])
+      @post.save
+    elsif
+      @post = Post.new(username: params[:username], content: params[:content], parent_id: -1)
+      @post.save
+    end
     redirect_to("/posts/index")
   end
 
@@ -51,6 +56,11 @@ class PostsController < ApplicationController
     def getTimeline(user_id)
       followed_id_lists = Follow.where(follower_id: user_id).select(:followed_id)
       username_lists = User.where(id: followed_id_lists).or(User.where(id: user_id)).select(:username)
-      @posts = Post.where(username: username_lists).order(created_at: :desc)
+      @posts = Post.where(username: username_lists).where(parent_id: -1).order(created_at: :desc)
+    end
+
+    def getFollows(user_id)
+      followed_id_lists = Follow.where(follower_id: user_id).select(:followed_id)
+      @users = User.where(id: followed_id_lists).or(User.where(id: user_id))
     end
 end

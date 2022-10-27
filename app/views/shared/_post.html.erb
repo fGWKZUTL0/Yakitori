@@ -1,60 +1,59 @@
-<%
-  this_user = @users.find_by(username: post.username)
-%>
-<div class="row" id="posts">
-  <div class="col-2">
-    <%= link_to image_tag(this_user.icon.thumb100.url, class: "rounded-circle"), "/posts/#{post.username}/profile" %>
-  </div>
-  <div class="col-1">
-  </div>
-  <div class="col-9">
-    <p class="mb-0"><%= this_user.name %>
-    <a class="text-decoration-none" href="/posts/<%= post.username %>/profile">@<%= post.username %></a>
-    </p>
-    <div class="content" onclick="jumpToThis(<%= post.id %>)"><%= nl2br(post.content) %></div>
-    <div class="post_footer">
-      <!-- リプライ -->
-      <i data-bs-toggle="modal" data-bs-target="#exampleModal" id="reply_icon" class="fa-regular fa-comment"></i>
+<div id="post_<%= post.id %>">
+  <div class="row" id="posts">
+    <div class="col-2">
+      <%= link_to image_tag(this_user.icon.thumb100.url, class: "rounded-circle"), "/posts/#{post.username}/profile" %>
+    </div>
+    <div class="col-1">
+    </div>
+    <div class="col-9">
+      <p class="mb-0"><%= this_user.name %>
+      <a class="text-decoration-none" href="/posts/<%= post.username %>/profile">@<%= post.username %></a>
+      </p>
+      <div class="content" onclick="jumpToThis(<%= post.id %>)"><%= nl2br(post.content) %></div>
+      <div class="post_footer">
+        <!-- リプライ -->
+        <i data-bs-toggle="modal" data-bs-target="#exampleModal" id="reply_icon" data-bs-whatever="<%= post.id %>" class="fa-regular fa-comment">
+          <%= reply_count(post) %>
+        </i>
 
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">返信</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <%= form_with url: posts_create_path, local: true do |f| %>
-              <div class="form">
-                <div class="modal-body">
-                  <div class="form-body">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">返信</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <%= form_with url: posts_create_path, local: true do |f| %>
+                <div class="form">
+                  <div class="modal-body">
+                    <div class="form-body">
+                      <input type="hidden" name="parent_id" id="parent_id" value="">
                       <input type="hidden" name="username" value="<%= current_user.username %>">
                       <textarea class="form-control" name="content"></textarea>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">返信</button>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="submit" class="btn btn-primary">返信</button>
-                </div>
-              </div>
-            <% end %>
+              <% end %>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- <i id="reply_icon" class="fa-regular fa-comment"></i> -->
-      <!-- いいね -->
-      <% if current_user.liked_by?(post.id) %>
+        <!-- <i id="reply_icon" class="fa-regular fa-comment"></i> -->
+        <!-- いいね -->
+        <% if current_user.liked_by?(post.id) %>
           <%= link_to post_likes_path(post), method: :delete, remote: true, class: "link-danger" do%>
             <i class="fa-solid fa-heart"><%= post.likes.count %></i>
           <% end %>
-      <% else %>
+        <% else %>
           <%= link_to post_likes_path(post), method: :get, remote: true, class: "link-secondary" do %>
             <i class="fa-regular fa-heart"><%= post.likes.count %></i>
           <% end %>
-      <% end %>
-      <%= post.created_at %>
+        <% end %>
+        <%= post.created_at %>
+      </div>
     </div>
   </div>
 </div>
-<script>
-  
-</script>
