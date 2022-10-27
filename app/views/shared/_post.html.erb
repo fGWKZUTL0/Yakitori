@@ -25,7 +25,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">返信</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <%= form_with url: posts_create_path, local: true, class: "modal_form" do |f| %>
+              <%= form_with url: posts_create_path, local: true, id: "modal_form" ,class: "modal_form" do |f| %>
                 <div class="form">
                   <div class="modal-body">
                     <div class="form-body">
@@ -35,8 +35,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">返信</button>
+                    <button id="btn_submit" type="submit" class="btn btn-primary">返信</button>
                   </div>
                 </div>
               <% end %>
