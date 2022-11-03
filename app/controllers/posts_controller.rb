@@ -24,6 +24,8 @@ class PostsController < ApplicationController
       #リプライ
       @post = Post.new(username: params[:username], content: params[:content], parent_id: params[:parent_id])
       @post.save
+      parent_post = Post.find_by(id: params[:parent_id])
+      parent_post_user = User.find_by(username: parent_post.username)
 
       redirect_to "/posts/#{getEndOfParentId(@post)}"
     elsif
