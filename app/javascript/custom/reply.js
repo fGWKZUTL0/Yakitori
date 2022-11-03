@@ -17,16 +17,16 @@
     document.getElementById("parent_id").value = recipient
   })
 
-  const submit_btn = document.getElementById("btn_submit")
-  const modal_form = document.getElementById("modal_form")
+  //const submit_btn = document.getElementById("btn_submit")
+  //const modal_form = document.getElementById("modal_form")
 
-  let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
+  /*let myModal = new bootstrap.Modal(document.getElementById('exampleModal'), {
     keyboard: false
-  })
+  })*/
   
-  submit_btn.addEventListener('click', function(event){
+  /*submit_btn.addEventListener('click', function(event){
     event.preventDefault()
     myModal.hide()
     modal_form.submit()
-  })
+  })*/
 }

@@ -27,8 +27,13 @@ class PostsController < ApplicationController
       parent_post = Post.find_by(id: params[:parent_id])
       parent_post_user = User.find_by(username: parent_post.username)
 
-      redirect_to "/posts/#{getEndOfParentId(@post)}"
-    elsif
+      render turbo_stream: turbo_stream.replace(
+        "turbo-frame-post-#{params[:parent_id]}",
+        partial: 'shared/post',
+        locals: { post: parent_post, this_user: parent_post_user},
+      )
+
+    else
       #リプライではない普通のツイート
       @post = Post.new(username: params[:username], content: params[:content], parent_id: -1)
       @post.save
