@@ -38,14 +38,21 @@ class PostsController < ApplicationController
       #リプライ
       @post = Post.new(username: params[:username], content: params[:content], parent_id: params[:parent_id])
       @post.save
-      parent_post = Post.find_by(id: getEndOfParentId(params[:parent_id]))
+      parent_post = Post.find_by(id: params[:parent_id])
       parent_post_user = User.find_by(username: parent_post.username)
+      end_parent_post = Post.find_by(id: getEndOfParentId(params[:parent_id]))
+      end_parent_post_user = User.find_by(username: parent_post.username)
 
       render turbo_stream: [
         turbo_stream.replace(
+          "turbo-frame-post-#{parent_post.id}",
+          partial: 'shared/post',
+          locals: { post: parent_post, this_user: parent_post_user},
+        ),
+        turbo_stream.replace(
           "turbo-frame-reply-posts",
           partial: 'shared/reply_posts',
-          locals: { post: parent_post, this_user: parent_post_user, users: users},
+          locals: { post: end_parent_post, this_user: end_parent_post_user, users: users},
         )
       ]
     end
