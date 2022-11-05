@@ -2,13 +2,10 @@
    this_user = @this_user
 %>
 <div class="main profile">
-   <div class="container">
-      <%= render 'shared/profile', this_user: this_user %>
-      <div class="row">
-         <p><%= this_user.bio %></p>
-      </div>
-
-  </div>
+   <%= render 'shared/profile', this_user: this_user %>
+   <div class="row">
+      <p><%= this_user.bio %></p>
+   </div>
 </div>
 
 <%= render partial: 'shared/TimeLine', locals:{ 'posts': @posts, 'users': @users } %>

@@ -1,9 +1,6 @@
 <div class="main posts-new">
-   <div class="container">
-      <% if current_user != nil %>
-         <h2 class="form-heading ms-2">タイムライン</h2>
-         
-      </div>
+   <% if current_user != nil %>
+      <h2 class="form-heading ms-2">タイムライン</h2>
       <%= render partial: 'shared/TimeLine', locals:{ 'posts': @posts, 'users': @users } %>
    <% else %>
       <h2>ログインしてください</h2>

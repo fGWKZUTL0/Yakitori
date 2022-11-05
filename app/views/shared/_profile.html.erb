@@ -6,14 +6,14 @@
       <h3><b><%= this_user.name %></b></h3>
       <p><small class="text-muted">@<%= this_user.username %></small></p>
       <p>
-          <a href="/follows/followings/<%= this_user.username %>" class="link-dark">
-            <strong><%= this_user.followings.count %></strong>
-            <small class="text-muted">フォロー中</small>
-          </a>
-          <a href="/follows/followers/<%= this_user.username %>" class="link-dark">
-            <strong><%= this_user.followers.count %></strong>
-            <small class="text-muted">フォロワー</small>
-          </a>
+        <a href="/follows/followings/<%= this_user.username %>" class="link-dark">
+          <strong><%= this_user.followings.count %></strong>
+          <small class="text-muted">フォロー中</small>
+        </a>
+        <a href="/follows/followers/<%= this_user.username %>" class="link-dark">
+          <strong><%= this_user.followers.count %></strong>
+          <small class="text-muted">フォロワー</small>
+        </a>
       </p>
     </div>
     <div class="col-5">
