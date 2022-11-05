@@ -1,9 +1,7 @@
-<div class="main posts-show">
-  <div class="container">
-    <div class="posts-show-item">
-      <div class="row" id="posts">
-        <%= render 'shared/reply_post', post: @post, this_user: @this_user, users: @users %>
-      </div>
-    </div>
+<div class="container">
+  <div class="row" id="posts">
+    <turbo-frame id="turbo-frame-reply-posts">
+      <%= render 'shared/reply_posts', post: @post, this_user: @this_user, users: @users %>
+    </turbo-frame>
   </div>
 </div>
