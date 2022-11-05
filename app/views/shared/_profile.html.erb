@@ -1,22 +1,35 @@
-<div class="row" id="follow_<%= this_user.id %>">
-    <div class="col-3">
-      <%= image_tag this_user.icon.thumb.url, class: "rounded-circle" %>
+<turbo-frame id="turbo-frame-user-profile">
+  <div class="row" id="follow_<%= this_user.id %>">
+      <div class="col-3">
+        <%= image_tag this_user.icon.thumb.url, class: "rounded-circle" %>
+      </div>
+      <div class="col-4">
+        <h3><b><%= this_user.name %></b></h3>
+        <p><small class="text-muted">@<%= this_user.username %></small></p>
+        <p>
+          <a href="/follows/followings/<%= this_user.username %>" class="link-dark">
+            <strong><%= this_user.followings.count %></strong>
+            <small class="text-muted">フォロー中</small>
+          </a>
+          <a href="/follows/followers/<%= this_user.username %>" class="link-dark">
+            <strong><%= this_user.followers.count %></strong>
+            <small class="text-muted">フォロワー</small>
+          </a>
+        </p>
+      </div>
+      <div class="col-5">
+        <% if current_user.username == this_user.username %>
+            <div class="follow_<%= this_user.id %>">
+              <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, id: "follow_btn", class: "btn btn-primary rounded-pill" %>
+            </div>
+        <% elsif current_user.following?(this_user) %>
+          <%= button_to 'フォロー中', user_follows_path(this_user.id), method: :delete, remote: true, id: "follow_btn", class: "btn btn-primary rounded-pill" %>
+        <% else %>
+          <%= button_to 'フォロー', user_follows_path(this_user.id), method: :post, remote: true, id: "follow_btn", class: "btn btn-outline-primary rounded-pill" %>
+        <% end %>
+      </div>
+      <div class="row">
+        <p><%= this_user.bio %></p>
     </div>
-    <div class="col-4">
-      <h3><b><%= this_user.name %></b></h3>
-      <p><small class="text-muted">@<%= this_user.username %></small></p>
-      <p>
-        <a href="/follows/followings/<%= this_user.username %>" class="link-dark">
-          <strong><%= this_user.followings.count %></strong>
-          <small class="text-muted">フォロー中</small>
-        </a>
-        <a href="/follows/followers/<%= this_user.username %>" class="link-dark">
-          <strong><%= this_user.followers.count %></strong>
-          <small class="text-muted">フォロワー</small>
-        </a>
-      </p>
-    </div>
-    <div class="col-5">
-      <%= render 'shared/follow_button', this_user: this_user %>
-    </div>
-</div>
+  </div>
+</turbo-frame>

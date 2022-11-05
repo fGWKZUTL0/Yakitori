@@ -3,9 +3,6 @@
 %>
 <div class="main profile">
    <%= render 'shared/profile', this_user: this_user %>
-   <div class="row">
-      <p><%= this_user.bio %></p>
-   </div>
 </div>
 
 <%= render partial: 'shared/TimeLine', locals:{ 'posts': @posts, 'users': @users } %>

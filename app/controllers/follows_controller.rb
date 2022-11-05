@@ -6,8 +6,8 @@ class FollowsController < ApplicationController
     #redirect_to request.referer
 
     render turbo_stream: turbo_stream.replace(
-      'follow_button',
-      partial: 'shared/follow_button',
+      'turbo-frame-user-profile',
+      partial: 'shared/profile',
       locals: { this_user: @this_user },
     )
   end
@@ -18,8 +18,8 @@ class FollowsController < ApplicationController
     #redirect_to request.referer
 
     render turbo_stream: turbo_stream.replace(
-      'follow_button',
-      partial: 'shared/follow_button',
+      'turbo-frame-user-profile',
+      partial: 'shared/profile',
       locals: { this_user: @this_user },
     )
   end
