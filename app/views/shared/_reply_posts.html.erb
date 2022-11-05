@@ -1,0 +1,10 @@
+<turbo-frame id="turbo-frame-reply-posts">
+  <div class="mb-2">
+    <%= render 'shared/post', post: post, this_user: this_user, users: users %>
+  </div>
+  <% get_childs(post).each do |child| %>
+    <div class="ms-4">
+      <%= render 'shared/reply_posts', post: child, this_user: users.find_by(username: child.username), users: users %>
+    </div>
+  <% end %>
+</turbo-frame>

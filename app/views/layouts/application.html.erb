@@ -16,8 +16,9 @@
     <!-- bootstrap.js の cdn -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
   </head>
-
+  
   <body class="container-fluid">
+    <%= turbo_frame_tag "modal" %>
     <div class="row">
       <div class="col-3">
         <header>
@@ -48,7 +49,9 @@
             <li class="nav-item">
               <%= button_to '設定', posts_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill"%>
             </li>
-          </ul>
+            <li class="nav-item">
+              <%= button_to 'Tweet', posts_new_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo_frame: 'modal' } %>
+            </li>
         </header>
       </div>
       <div class="col-6">

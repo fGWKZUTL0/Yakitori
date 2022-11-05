@@ -8,9 +8,10 @@ Rails.application.routes.draw do
 
   get "posts" => "posts#index"
   get "posts/index" => "posts#index"
+  get "posts/:id/new" => "posts#new"
   get "posts/new" => "posts#new"
 
-  get "posts/:username/profile" => "posts#profile" #マイページ表示用 下のposts/:idより上におかないと#showに飛んでしまう
+  get "posts/:username/profile" => "users#profile" #マイページ表示用 下のposts/:idより上におかないと#showに飛んでしまう
 
   get "posts/:id" => "posts#show"
 
@@ -39,7 +40,6 @@ Rails.application.routes.draw do
   delete "/logout" => "sessions#destroy"
 
   get "/search/index" => "searches#index"
-  post "/search/result" => "searches#search"
 
   resources :users do
     resource :follows, only: [:create, :destroy]
@@ -50,6 +50,10 @@ Rails.application.routes.draw do
   resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
     resource :likes, only: [:create, :destroy]
     post "/posts/:post_id/likes" => "likes#create"
+    delete "/posts/:post_id/likes" => "likes#destroy"
   end
 
+  resources :posts, only: [:new] do
+    get "new/" => "posts#new"
+  end
 end

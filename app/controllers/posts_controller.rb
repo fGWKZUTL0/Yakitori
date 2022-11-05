@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
   def index
     #フォローしているユーザーと自分のpostのみを取得する
     @posts = getTimeline(session[:user_id])
@@ -14,18 +15,48 @@ class PostsController < ApplicationController
   end
 
   def new
-
+    @parent_id = -1
+    if params[:id] != nil
+      @parent_id = params[:id]
+    end
   end
 
   def create
-    if params[:parent_id] != nil
-      @post = Post.new(username: params[:username], content: params[:content], parent_id: params[:parent_id])
-      @post.save
-    elsif
+    @this_user = User.find_by(username: params[:username])
+    users = User.all
+    if params[:parent_id] == nil || params[:parent_id].to_i == -1
+      #リプライではない普通のツイート
       @post = Post.new(username: params[:username], content: params[:content], parent_id: -1)
       @post.save
+
+      render turbo_stream: turbo_stream.prepend(
+        "timeline",
+        partial: 'shared/post',
+        locals: { post: @post, this_user: @this_user},
+      )
+    else
+      #リプライ
+      @post = Post.new(username: params[:username], content: params[:content], parent_id: params[:parent_id])
+      @post.save
+      parent_post = Post.find_by(id: params[:parent_id])
+      parent_post_user = User.find_by(username: parent_post.username)
+      end_parent_post = Post.find_by(id: getEndOfParentId(params[:parent_id]))
+      end_parent_post_user = User.find_by(username: parent_post.username)
+
+      render turbo_stream: [
+        turbo_stream.replace(
+          "turbo-frame-post-#{parent_post.id}",
+          partial: 'shared/post',
+          locals: { post: parent_post, this_user: parent_post_user},
+        ),
+        turbo_stream.replace(
+          "turbo-frame-reply-posts",
+          partial: 'shared/reply_posts',
+          locals: { post: end_parent_post, this_user: end_parent_post_user, users: users},
+        )
+      ]
     end
-    redirect_to("/posts/index")
+    #redirect_to("/posts/index")
   end
 
   def edit
@@ -46,12 +77,6 @@ class PostsController < ApplicationController
     redirect_to("/posts/index")
   end
 
-  def profile
-    @posts = Post.all.where(username: params[:username]).order(created_at: :desc)
-    @this_user = User.find_by(username: params[:username])
-    @users = User.all
-  end
-
   private 
     def getTimeline(user_id)
       followed_id_lists = Follow.where(follower_id: user_id).select(:followed_id)
@@ -62,5 +87,13 @@ class PostsController < ApplicationController
     def getFollows(user_id)
       followed_id_lists = Follow.where(follower_id: user_id).select(:followed_id)
       @users = User.where(id: followed_id_lists).or(User.where(id: user_id))
+    end
+
+    def getEndOfParentId(id)
+      post = Post.find_by(id: id)
+      while post.parent_id != -1 do
+        post = Post.find_by(id: post.parent_id)
+      end
+      post.id
     end
 end
