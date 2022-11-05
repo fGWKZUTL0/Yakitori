@@ -1,0 +1,10 @@
+
+<turbo-frame id="result-posts">
+  <% if users != nil && posts != nil %>
+    <% posts.each do |post| %>
+        <div id="post_<%= post.id %>" class="mb-2">
+          <%= render 'shared/post', post: post, this_user: users.find_by(username: post.username) %>
+        </div>
+    <% end %>
+  <% end %>
+</turbo-frame>

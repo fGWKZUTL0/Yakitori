@@ -1,9 +1,84 @@
-<div class="main posts-new">
-  <h2 class="form-heading ms-2">検索</h2>
-  <%= form_with url: search_index_path, data: { turbo_frame: "result", controller: "search", action: "input->search#submit"}, method: "get", class: "form" do |f| %>
-    <input type="text" name="keyword" class="form-control" placeholder="キーワードを入力">
-  <% end %>
-  <div class="container">
-    <%= render partial: 'shared/result', locals:{ 'posts': @results, 'users': @users } %>
+
+<h2 class="form-heading ms-2">検索</h2>
+<%= form_with url: search_index_path, data: { turbo_frame: "result-posts", controller: "search", action: "input->search#submit"}, method: "get", class: "form" do |f| %>
+  <input type="text" name="keyword" class="form-control" placeholder="キーワードを入力">
+<% end %>
+<div class="mt-2">
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link active"
+        id="home-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#home"
+        type="button"
+        role="tab"
+        aria-controls="home"
+        aria-selected="true"
+      >
+        Home
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="profile-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#profile"
+        type="button"
+        role="tab"
+        aria-controls="profile"
+        aria-selected="false"
+      >
+        Profile
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button
+        class="nav-link"
+        id="contact-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#contact"
+        type="button"
+        role="tab"
+        aria-controls="contact"
+        aria-selected="false"
+      >
+        Contact
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div
+      class="tab-pane fade show active"
+      id="home"
+      role="tabpanel"
+      aria-labelledby="home-tab"
+    >
+      <div class="container">
+        <turbo-frame id="result-posts"></turbo-frame>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="profile"
+      role="tabpanel"
+      aria-labelledby="profile-tab"
+    >
+      <div class="container">
+        <turbo-frame id="result"></turbo-frame>
+      </div>
+    </div>
+    <div
+      class="tab-pane fade"
+      id="contact"
+      role="tabpanel"
+      aria-labelledby="contact-tab"
+    >
+      <div class="container">
+        <turbo-frame id="result"></turbo-frame>
+      </div>
+    </div>
   </div>
 </div>
+

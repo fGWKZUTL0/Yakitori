@@ -1,10 +1,7 @@
 class SearchesController < ApplicationController
 
   def index
-
-    if params[:keyword] != nil
-      params[:keyword].strip!
-
+    if params[:keyword] != nil && params[:keyword].strip != ""
       results = Post.all
       keywords = params[:keyword].split(/[ 　]/)
 
@@ -15,11 +12,11 @@ class SearchesController < ApplicationController
       @users = User.all
 
       render turbo_stream: turbo_stream.replace(
-        'result',
-        partial: 'shared/result',
+        'result-posts',
+        partial: 'shared/result-posts',
         locals: { posts: results, users: @users },
       )
     end
   end
-
+  
 end
