@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get "posts" => "posts#index"
   get "posts/index" => "posts#index"
+  get "posts/:id/new" => "posts#new"
   get "posts/new" => "posts#new"
 
   get "posts/:username/profile" => "users#profile" #マイページ表示用 下のposts/:idより上におかないと#showに飛んでしまう
@@ -52,4 +53,7 @@ Rails.application.routes.draw do
     delete "/posts/:post_id/likes" => "likes#destroy"
   end
 
+  resources :posts, only: [:new] do
+    get "new/" => "posts#new"
+  end
 end

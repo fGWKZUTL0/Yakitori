@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+
   def index
     #フォローしているユーザーと自分のpostのみを取得する
     @posts = getTimeline(session[:user_id])
@@ -14,13 +15,26 @@ class PostsController < ApplicationController
   end
 
   def new
-
+    @parent_id = -1
+    if params[:id] != nil
+      @parent_id = params[:id]
+    end
   end
 
   def create
     @this_user = User.find_by(username: params[:username])
 
-    if params[:parent_id] != nil
+    if params[:parent_id] == nil || params[:parent_id] == "-1"
+      #リプライではない普通のツイート
+      @post = Post.new(username: params[:username], content: params[:content], parent_id: -1)
+      @post.save
+
+      render turbo_stream: turbo_stream.replace(
+        "new_post",
+        partial: 'shared/new_post',
+        locals: { post: @post, this_user: @this_user},
+      )
+    else
       #リプライ
       @post = Post.new(username: params[:username], content: params[:content], parent_id: params[:parent_id])
       @post.save
@@ -31,17 +45,6 @@ class PostsController < ApplicationController
         "turbo-frame-post-#{params[:parent_id]}",
         partial: 'shared/post',
         locals: { post: parent_post, this_user: parent_post_user},
-      )
-
-    else
-      #リプライではない普通のツイート
-      @post = Post.new(username: params[:username], content: params[:content], parent_id: -1)
-      @post.save
-
-      render turbo_stream: turbo_stream.replace(
-        "new_post",
-        partial: 'shared/new_post',
-        locals: { post: @post, this_user: @this_user},
       )
     end
     #redirect_to("/posts/index")
