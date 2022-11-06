@@ -28,17 +28,26 @@ class UsersController < ApplicationController
   end
 
   def update
+    users = User.all
     @user = User.find_by(id: params[:id])
     @user.update(bio: params[:bio])
     if params[:icon] != nil
       @user.update(icon: params[:icon])
     end
 
-    render turbo_stream: turbo_stream.replace(
-      'turbo-frame-user-profile',
-      partial: 'shared/profile',
-      locals: { this_user: @user },
-    )
+    @posts = Post.all.where(username: @user.username).order(created_at: :desc)
+
+    render turbo_stream:[ turbo_stream.replace(
+        'turbo-frame-user-profile',
+        partial: 'shared/profile',
+        locals: { this_user: @user },
+      ),
+      turbo_stream.replace(
+        "timeline",
+        partial: 'shared/TimeLine',
+        locals: { posts: @posts, users: users}, 
+      )
+    ]
     #redirect_to("/posts/#{@user.username}/profile")
   end
 
