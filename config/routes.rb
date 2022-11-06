@@ -29,8 +29,8 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
 
   get "profile" => "users#show"
-  get "/:username/profile/edit" => "users#edit" #プロフィール更新用
-  patch ":username/profile/edit" => "users#update"
+  get "/:id/profile/edit" => "users#edit" #プロフィール更新用
+  patch ":id/profile/edit" => "users#update"
   get "follows/followings/:username" => "follows#followings", as: 'followings'
   get "follows/followers/:username" => "follows#followers", as: 'followers'
   delete "unsubscribe" => "users#destroy"

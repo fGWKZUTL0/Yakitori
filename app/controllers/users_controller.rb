@@ -24,17 +24,22 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by(id: params[:id])
   end
 
   def update
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by(id: params[:id])
     @user.update(bio: params[:bio])
     if params[:icon] != nil
       @user.update(icon: params[:icon])
     end
 
-    redirect_to("/posts/#{@user.username}/profile")
+    render turbo_stream: turbo_stream.replace(
+      'turbo-frame-user-profile',
+      partial: 'shared/profile',
+      locals: { this_user: @user },
+    )
+    #redirect_to("/posts/#{@user.username}/profile")
   end
 
   def destroy
