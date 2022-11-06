@@ -1,24 +1,24 @@
-<div class="main users-new">
-  <div class="container">
-    <h1 class="form-heading">編集する</h1>
-    <%= form_with model: @user,url: { controller: 'users', action: 'update', id: @user.id}, html: { multipart: true }, local: true do |f| %>
-
-      <div class="form">
-        <div class="form-body">
-          <p>bio</p>
-          <div>
-            <label>
-              icon
-              <input type="file" name="icon" accept="image/jpeg, image/png, image/jpg, image/gif" >
-            </label>
-          </div>
-          <div>
-            <textarea type="text" name="bio"><%= @user.bio %></textarea>
-          </div>
-          <input type="hidden" name="username" value="<%= current_user.username %>">
-          <input class="btn btn-primary rounded-pill" type="submit" value="更新">
+<%= turbo_frame_tag "profile-modal" do %>
+  <div class="modal fade" data-controller="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ここに返信先のツイートを表示</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+        <%= form_with url: posts_create_path, id: "modal_form" ,class: "modal_form form" do |f| %>
+          <div class="modal-body">
+            <div class="form-body">
+              <input type="hidden" name="parent_id" value=<%= @parent_id %>>
+              <input type="hidden" name="username" value="<%= current_user.username %>">
+              <textarea class="form-control" name="content"></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="btn_submit" type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">返信</button>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>

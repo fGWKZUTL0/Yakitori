@@ -1,5 +1,4 @@
 <%= turbo_frame_tag "modal" do %>
-
   <div class="modal fade" data-controller="modal">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -22,45 +21,4 @@
       </div>
     </div>
   </div>
-
-  <!-- 
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="返信フォーム用モーダル" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">返信</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <%= form_with url: posts_create_path, id: "modal_form" ,class: "modal_form" do |f| %>
-          <div class="form">
-            <div class="modal-body">
-              <div class="form-body">
-                <input type="hidden" name="parent_id" id="parent_id" value="">
-                <input type="hidden" name="username" value="<%= current_user.username %>">
-                <textarea class="form-control" name="content"></textarea>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button id="btn_submit" type="submit" class="btn btn-primary">返信</button>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-
-  <div class="main posts-new">
-    <div class="container">
-      <%= form_tag("/posts/create") do %>
-        <div class="form">
-          <div class="form-body">
-            <input type="hidden" name="username" value="<%= current_user.username %>">
-            <textarea name="content" ></textarea>
-            <input type="submit" value="投稿">
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-  -->
 <% end %>

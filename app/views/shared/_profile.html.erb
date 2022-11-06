@@ -19,7 +19,7 @@
       </div>
       <div class="col-5">
         <% if current_user.username == this_user.username %>
-          <%= button_to 'プロフィールを編集', "/#{this_user.username}/profile/edit", method: :get, id: "follow_btn", class: "btn btn-primary rounded-pill" %>
+          <%= button_to 'プロフィールを編集', edit_user_path(this_user.username), method: :get, id: "follow_btn", class: "btn btn-primary rounded-pill", data: { turbo_frame: 'profile-modal' } %>
         <% elsif current_user.following?(this_user) %>
           <%= button_to 'フォロー中', user_follows_path(this_user.id), method: :delete, remote: true, id: "follow_btn", class: "w-25 btn btn-primary rounded-pill" %>
         <% else %>

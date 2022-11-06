@@ -1,6 +1,7 @@
 <%
    this_user = @this_user
 %>
+<%= turbo_frame_tag "profile-modal" %>
 <div class="main profile">
    <%= render 'shared/profile', this_user: this_user %>
 </div>
