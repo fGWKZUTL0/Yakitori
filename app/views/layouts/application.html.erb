@@ -27,7 +27,7 @@
               <%= button_to 'タイムライン', posts_index_path, method: :get, data: { turbo: false }, class: "nav-link btn btn-link rounded-pill"%>
             </li>
             <li class="nav-item">
-              <%= button_to '検索', search_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill"%>
+              <%= button_to '検索', search_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo: false } %>
             </li>
             <li class="nav-item">
               <%= button_to '通知', posts_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill"%>
