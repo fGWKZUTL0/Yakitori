@@ -1,4 +1,4 @@
-<% if users.exists? %>
+<turbo-frame id="result">
   <% users.each do |this_user| %>
     <div class="row mb-2" id="posts">
       <div class="col-2">
@@ -12,6 +12,4 @@
       </div>
     </div>
   <% end %>
-<% else %>
-  <p>ユーザーはいません</p>
-<% end %>
+</turbo-frame>

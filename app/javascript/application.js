@@ -4,5 +4,6 @@ import "controllers"
 
 import './custom/unfollow_text';
 import './custom/reply';
+import './custom/search';
 //= require popper
 //= require bootstrap-sprockets

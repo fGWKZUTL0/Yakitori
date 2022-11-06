@@ -1,36 +1,38 @@
 
 <h2 class="form-heading ms-2">検索</h2>
-<%= form_with url: search_index_path, data: { turbo_frame: "result-posts", controller: "search", action: "input->search#submit"}, method: "get", class: "form" do |f| %>
+<%= form_with url: search_index_path, data: { turbo_frame: "result", controller: "search", action: "input->search#submit"}, method: "get",
+  id: "search-form", class: "form" do |f| %>
   <input type="text" name="keyword" class="form-control" placeholder="キーワードを入力">
+  <input type="hidden" name="tab_type" id="tab-type" value="posts">
 <% end %>
 <div class="mt-2">
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <ul class="nav nav-pills" id="myTab" role="tablist">
     <li class="nav-item" role="presentation">
       <button
         class="nav-link active"
-        id="home-tab"
+        id="posts-tab"
         data-bs-toggle="tab"
-        data-bs-target="#home"
+        data-bs-target="#posts"
         type="button"
         role="tab"
-        aria-controls="home"
+        aria-controls="posts"
         aria-selected="true"
       >
-        Home
+        投稿
       </button>
     </li>
     <li class="nav-item" role="presentation">
       <button
         class="nav-link"
-        id="profile-tab"
+        id="users-tab"
         data-bs-toggle="tab"
-        data-bs-target="#profile"
+        data-bs-target="#users"
         type="button"
         role="tab"
-        aria-controls="profile"
+        aria-controls="users"
         aria-selected="false"
       >
-        Profile
+        ユーザー
       </button>
     </li>
     <li class="nav-item" role="presentation">
@@ -48,37 +50,8 @@
       </button>
     </li>
   </ul>
-  <div class="tab-content" id="myTabContent">
-    <div
-      class="tab-pane fade show active"
-      id="home"
-      role="tabpanel"
-      aria-labelledby="home-tab"
-    >
-      <div class="container">
-        <turbo-frame id="result-posts"></turbo-frame>
-      </div>
-    </div>
-    <div
-      class="tab-pane fade"
-      id="profile"
-      role="tabpanel"
-      aria-labelledby="profile-tab"
-    >
-      <div class="container">
-        <turbo-frame id="result"></turbo-frame>
-      </div>
-    </div>
-    <div
-      class="tab-pane fade"
-      id="contact"
-      role="tabpanel"
-      aria-labelledby="contact-tab"
-    >
-      <div class="container">
-        <turbo-frame id="result"></turbo-frame>
-      </div>
-    </div>
-  </div>
+</div>
+<div class="container">
+  <turbo-frame id="result"></turbo-frame>
 </div>
 
