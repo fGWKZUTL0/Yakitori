@@ -2,24 +2,24 @@
 <div class="main profile">
    <%= render 'shared/profile', this_user: @this_user %>
 </div>
-<%= form_with url: "/posts/#{@this_user.username}/profile", data: { turbo_frame: "timeline", controller: "search"}, method: "post",
+<%= form_with url: "/posts/#{@this_user.username}/profile", data: { turbo_frame: "timeline", controller: "search"}, method: "get",
   id: "search-userpost", class: "form" do |f| %>
   <input type="hidden" name="tab_type" id="tab-type" value="posts">
 
   <div class="mt-2">
-    <ul class="nav nav-pills" id="myTab" role="tablist">
+    <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-      <button
-         data-action="click->search#submit"
-         class="nav-link active"
-         id="posts-tab"
-         data-bs-toggle="tab"
-         data-bs-target="#posts"
-         type="button"
-         role="tab"
-         aria-controls="posts"
-         aria-selected="true"
-      >
+        <button
+          data-action="click->search#submit"
+          class="nav-link active"
+          id="posts-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#posts"
+          type="button"
+          role="tab"
+          aria-controls="posts"
+          aria-selected="true"
+        >
           投稿
         </button>
       </li>

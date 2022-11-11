@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     if user.save
       log_in(user)
-      redirect_to profile_path(user)
+      redirect_to "/profile/#{user.username}"
     else
       render 'new'
     end

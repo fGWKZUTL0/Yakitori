@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "posts/:id/new" => "posts#new"
   get "posts/new" => "posts#new"
 
-  get "posts/:username/profile" => "users#profile" #マイページ表示用 下のposts/:idより上におかないと#showに飛んでしまう
+  get "profile/:username" => "users#profile" #マイページ表示用 下のposts/:idより上におかないと#showに飛んでしまう
   post "posts/:username/profile" => "users#search"
 
   get "posts/:id" => "posts#show"

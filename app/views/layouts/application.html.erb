@@ -24,33 +24,37 @@
         <header>
           <ul class="nav flex-column m-4 w-50">
             <li class="nav-item">
-              <%= button_to 'タイムライン', posts_index_path, method: :get, data: { turbo: false }, class: "nav-link btn btn-link rounded-pill"%>
+              <%= link_to 'タイムライン', posts_index_path, method: :get, data: { turbo: false }, class: "nav-link btn btn-link rounded-pill"%>
             </li>
             <li class="nav-item">
-              <%= button_to '検索', search_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo: false } %>
+              <%= link_to '検索', search_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo: false } %>
             </li>
             <li class="nav-item">
-              <%= button_to '通知', posts_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill"%>
+              <%= link_to '通知', posts_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo: false } %>
             </li>
             <li class="nav-item">
-              <%= button_to 'メッセージ', posts_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill"%>
+              <%= link_to 'メッセージ', posts_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo: false }%>
             </li>
             <% if current_user != nil %>
               <li class="nav-item">
-                <%= button_to 'マイページ', "/posts/#{current_user.username}/profile", method: :get, class: "nav-link  btn btn-link rounded-pill"%>
+                <%= link_to 'マイページ', "/profile/#{current_user.username}", method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo: false }%>
               </li>
+              <li class="nav-item">
+                <%= link_to 'ログアウト', logout_path, method: :delete, class: "nav-link btn btn-link rounded-pill", data: { turbo_method: :delete } %>
+              </li>
+            <% else %>
+            <li class="nav-item">
+              <%= link_to 'アカウント作成', signup_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo: false }%>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'ログイン', login_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo: false }%>
+            </li>
             <% end %>
             <li class="nav-item">
-              <%= button_to 'アカウント作成', signup_path, method: :get, class: "nav-link  btn btn-link rounded-pill"%>
+              <%= link_to '設定', posts_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo: false }%>
             </li>
             <li class="nav-item">
-              <%= button_to 'ログイン', login_path, method: :get, class: "nav-link  btn btn-link rounded-pill"%>
-            </li>
-            <li class="nav-item">
-              <%= button_to '設定', posts_index_path, method: :get, class: "nav-link  btn btn-link rounded-pill"%>
-            </li>
-            <li class="nav-item">
-              <%= button_to '投稿', posts_new_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo_frame: 'modal' } %>
+              <%= link_to '投稿', posts_new_path, method: :get, class: "nav-link  btn btn-link rounded-pill", data: { turbo_frame: 'modal' } %>
             </li>
         </header>
       </div>
