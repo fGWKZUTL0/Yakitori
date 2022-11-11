@@ -2,17 +2,16 @@
 <div class="main profile">
    <%= render 'shared/profile', this_user: @this_user %>
 </div>
-<%= form_with url: "/posts/#{@this_user.username}/profile", data: { turbo_frame: "timeline", controller: "search"}, method: "get",
-  id: "search-userpost", class: "form" do |f| %>
+<%= form_with url: "/profile/#{@this_user.username}", data: { turbo_frame: "timeline", controller: "profile"}, method: "post",
+   class: "form" do |f| %>
   <input type="hidden" name="tab_type" id="tab-type" value="posts">
-
   <div class="mt-2">
     <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button
-          data-action="click->search#submit"
+          data-action="click->profile#submit"
           class="nav-link active"
-          id="posts-tab"
+          id="user-posts-tab"
           data-bs-toggle="tab"
           data-bs-target="#posts"
           type="button"
@@ -24,17 +23,17 @@
         </button>
       </li>
       <li class="nav-item" role="presentation">
-         <button
-            data-action="click->search#submit"
-            class="nav-link"
-            id="replies-tab"
-            data-bs-toggle="tab"
-            data-bs-target="#replies"
-            type="button"
-            role="tab"
-            aria-controls="replies"
-            aria-selected="false"
-         >
+        <button
+          data-action="click->profile#submit"
+          class="nav-link"
+          id="user-replies-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#replies"
+          type="button"
+          role="tab"
+          aria-controls="replies"
+          aria-selected="false"
+        >
           返信
         </button>
       </li>
