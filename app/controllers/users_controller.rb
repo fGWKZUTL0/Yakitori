@@ -85,6 +85,18 @@ class UsersController < ApplicationController
         partial: 'shared/TimeLine',
         locals: { posts: @posts, users: @users },
       )
+    when "likes" then
+      
+      @posts = Post.find_by_sql("SELECT p.id, p.content, p.created_at, p.username, p.parent_id 
+        FROM posts AS p
+        RIGHT JOIN likes AS l ON p.id = l.post_id
+        WHERE l.user_id = #{@this_user.id}  ORDER BY l.created_at desc")
+
+      render turbo_stream: turbo_stream.replace(
+        'timeline',
+        partial: 'shared/TimeLine',
+        locals: { posts: @posts, users: @users },
+      )
     end
   end
 
