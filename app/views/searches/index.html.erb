@@ -3,13 +3,13 @@
 <%= form_with url: search_index_path, data: { turbo_frame: "result", controller: "search", action: "input->search#submit"}, method: "get",
   id: "search-form", class: "form" do |f| %>
   <input type="text" name="keyword" class="form-control" placeholder="キーワードを入力">
-  <input type="hidden" name="tab_type" id="tab-type" value="posts">
+  <input type="hidden" name="tab_type" id="tab-type" data-search-target="tabType" value="posts">
 
   <div class="mt-2">
     <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button
-          data-action="click->search#submit"
+          data-action="click->search#changePosts search#submit"
           class="nav-link active"
           id="posts-tab"
           data-bs-toggle="tab"
@@ -24,7 +24,7 @@
       </li>
       <li class="nav-item" role="presentation">
         <button
-          data-action="click->search#submit"
+          data-action="click->search#changeUsers search#submit"
           class="nav-link"
           id="users-tab"
           data-bs-toggle="tab"
