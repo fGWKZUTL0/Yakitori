@@ -1,9 +1,72 @@
-<%
-   this_user = @this_user
-%>
 <%= turbo_frame_tag "profile-modal" %>
 <div class="main profile">
-   <%= render 'shared/profile', this_user: this_user %>
+   <%= render 'shared/profile', this_user: @this_user %>
 </div>
+<%= form_with url: "/posts/#{@this_user.username}/profile", data: { turbo_frame: "timeline", controller: "search"}, method: "post",
+  id: "search-userpost", class: "form" do |f| %>
+  <input type="hidden" name="tab_type" id="tab-type" value="posts">
 
+  <div class="mt-2">
+    <ul class="nav nav-pills" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+      <button
+         data-action="click->search#submit"
+         class="nav-link active"
+         id="posts-tab"
+         data-bs-toggle="tab"
+         data-bs-target="#posts"
+         type="button"
+         role="tab"
+         aria-controls="posts"
+         aria-selected="true"
+      >
+          投稿
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+         <button
+            data-action="click->search#submit"
+            class="nav-link"
+            id="replies-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#replies"
+            type="button"
+            role="tab"
+            aria-controls="replies"
+            aria-selected="false"
+         >
+          返信
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="contact-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#contact"
+          type="button"
+          role="tab"
+          aria-controls="contact"
+          aria-selected="false"
+        >
+          画像
+        </button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button
+          class="nav-link"
+          id="contact-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#contact"
+          type="button"
+          role="tab"
+          aria-controls="contact"
+          aria-selected="false"
+        >
+          いいね
+        </button>
+      </li>
+    </ul>
+  </div>
+<% end %>
 <%= render partial: 'shared/TimeLine', locals:{ 'posts': @posts, 'users': @users } %>

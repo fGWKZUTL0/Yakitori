@@ -58,9 +58,34 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @posts = Post.all.where(username: params[:username]).order(created_at: :desc)
+    @posts = Post.all.where(username: params[:username]).where(parent_id: -1).order(created_at: :desc)
     @this_user = User.find_by(username: params[:username])
     @users = User.all
+  end
+
+  def search
+    #@posts = Post.all.where(username: params[:username]).order(created_at: :desc)
+    @this_user = User.find_by(username: params[:username])
+    @users = User.all
+
+    case params[:tab_type]
+    when "posts" then
+      @posts = Post.all.where(username: params[:username]).where(parent_id: -1).order(created_at: :desc)
+
+      render turbo_stream: turbo_stream.replace(
+        'timeline',
+        partial: 'shared/TimeLine',
+        locals: { posts: @posts, users: @users },
+      )
+    when "replies" then
+      @posts = Post.all.where(username: params[:username]).where.not(parent_id: -1).order(created_at: :desc)
+
+      render turbo_stream: turbo_stream.replace(
+        'timeline',
+        partial: 'shared/TimeLine',
+        locals: { posts: @posts, users: @users },
+      )
+    end
   end
 
   private

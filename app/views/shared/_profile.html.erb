@@ -21,9 +21,9 @@
         <% if current_user.username == this_user.username %>
           <%= button_to 'プロフィールを編集', edit_user_path(this_user), method: :get, id: "follow_btn", class: "btn btn-primary rounded-pill", data: { turbo_frame: 'profile-modal' } %>
         <% elsif current_user.following?(this_user) %>
-          <%= button_to 'フォロー中', user_follows_path(this_user.id), method: :delete, remote: true, id: "follow_btn", class: "w-25 btn btn-primary rounded-pill" %>
+          <%= button_to 'フォロー中', user_follows_path(this_user.id), method: :delete, remote: true, id: "follow_btn", class: "w-50 btn btn-primary rounded-pill" %>
         <% else %>
-          <%= button_to 'フォロー', user_follows_path(this_user.id), method: :post, remote: true, id: "follow_btn", class: "w-25 btn btn-outline-primary rounded-pill" %>
+          <%= button_to 'フォロー', user_follows_path(this_user.id), method: :post, remote: true, id: "follow_btn", class: "w-50 btn btn-outline-primary rounded-pill" %>
         <% end %>
       </div>
       <div class="row">
